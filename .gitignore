@@ -1,7 +1,8 @@
 /node_modules/*
 /controllers/*
 /SSL/*
-/view/*
+/views/*
+/src/*
 /static/*
 /common/*
 !.keep
