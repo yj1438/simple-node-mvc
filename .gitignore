@@ -2,7 +2,5 @@
 /controllers/*
 /SSL/*
 /views/*
-/src/*
 /static/*
-/common/*
 !.keep
