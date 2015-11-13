@@ -7,7 +7,6 @@
     "art-template": "^3.0.3",
     "http2": "^3.2.0",
     "merge": "^1.2.0",
-    "mysql": "^2.9.0",
     "q": "^1.4.1",
     "string-to-stream": "^1.0.1"
   }
