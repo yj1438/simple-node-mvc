@@ -8,6 +8,11 @@ module.exports = {
 
     port2 : '8082',
     
-    staticFileDir : 'static'
+    staticFileDir : 'static',               //静态文件文件夹
+                
+    gzip : true,                            //是否开启 GZIP
+    
+    cacheControl : 7 * 24 * 3600            //浏览器缓存时间（秒）
+//    cacheControl : 0            //浏览器缓存时间（秒）
     
 }

@@ -9,9 +9,9 @@ var route = require('./lib/route'),
     viewEngine = require('./lib/viewEngine');
 
 //===如果有未处理的异常抛出，可以在这里捕获到
-//process.on('uncaughtException', function (err) {
-//    console.log(err);
-//});
+process.on('uncaughtException', function (err) {
+    console.log(err);
+});
 //===
 
 //controller的上下文对象
@@ -21,6 +21,7 @@ var ControllerContext = function (req, res) {
         urlObj = url_parse(url),
         postObj,
         paramObj = {};
+    //合并 POST 里的参数
     try {
         paramObj = querystring.parse(urlObj.query);
         postObj = req.post ? querystring.parse(req.post) : {};
