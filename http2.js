@@ -1,4 +1,4 @@
-var https = require('http2'),
+var http2 = require('http2'),
     fs = require('fs'),
     path = require('path');
 var config = require('./config'),
@@ -9,7 +9,7 @@ var options = {
     cert: fs.readFileSync('./SSL/localhost.crt')
 };
 
-var app = require('http2').createServer(options, function (req, res) {
+var app = http2.createServer(options, function (req, res) {
     var _postData = '';
     //on用于添加一个监听函数到一个特定的事件
     if (req.url.indexOf('/demo') > -1 && res.push) {
