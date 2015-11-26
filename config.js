@@ -4,9 +4,9 @@
 
 module.exports = {
     
-    port1 : '8081',
+    port_normal : '80',
 
-    port2 : '8082',
+    port_ssl : '443',
     
     staticFileDir : 'static',               //静态文件文件夹
                 

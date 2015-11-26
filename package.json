@@ -1,5 +1,5 @@
 {
-  "name": "http2-tine-MVC",
+  "name": "http2-simple-MVC",
   "description": "a simple MVC used HTTP2",
   "version": "0.0.1",
   "private": "true",
@@ -10,5 +10,11 @@
     "q": "^1.4.1",
     "spdy": "^2.1.0",
     "string-to-stream": "^1.0.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-imagemin": "^2.4.0",
+    "gulp-tinify": "^1.0.1",
+    "imagemin-pngquant": "^4.2.0"
   }
 }

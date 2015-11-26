@@ -9,9 +9,9 @@ var route = require('./lib/route'),
     viewEngine = require('./lib/viewEngine');
 
 //===如果有未处理的异常抛出，可以在这里捕获到
-process.on('uncaughtException', function (err) {
-    console.log(err);
-});
+//process.on('uncaughtException', function (err) {
+//    console.log(err);
+//});
 //===
 
 //controller的上下文对象

@@ -4,10 +4,17 @@
  */
 
 var http = require('http'),
+    https = require('https'),
+    fs = require('fs'),
     config = require('./config'),
     server = require('./server');
 
-var app = http.createServer(function(req, res){
+var options = {
+    key: fs.readFileSync('./SSL/localhost.key'),
+    cert: fs.readFileSync('./SSL/localhost.crt')
+};
+
+var app = https.createServer(options, function(req, res){
         var _postData = '';
         //on用于添加一个监听函数到一个特定的事件
         req.on('data', function(chunk){
@@ -16,6 +23,6 @@ var app = http.createServer(function(req, res){
             req.post = _postData;
             server.handlerRequest(req, res);
         });
-    }).listen(config.port1);
+    }).listen(config.port_ssl);
     
-console.log('HTTP/1.1 Server running at http://localhost:'+ config.port1 +'/');
+console.log('HTTP/1.1 Server running at https://localhost:'+ config.port_ssl +'/');

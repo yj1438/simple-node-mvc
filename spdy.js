@@ -16,6 +16,6 @@ var app = spdy.createServer(options, function (req, res) {
         req.post = _postData;
         server.handlerRequest(req, res);
     });
-}).listen(config.port2);
+}).listen(config.port_ssl);
 
-console.log('SPDY Server running at https://localhost:' + config.port2 + '/');
+console.log('SPDY Server running at https://localhost:' + config.port_ssl + '/');

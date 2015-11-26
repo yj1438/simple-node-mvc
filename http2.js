@@ -29,6 +29,6 @@ var app = http2.createServer(options, function (req, res) {
 //        }
         server.handlerRequest(req, res);
     });
-}).listen(config.port2);
+}).listen(config.port_ssl);
 
-console.log('HTTP/2 Server running at https://localhost:' + config.port2 + '/');
+console.log('HTTP/2 Server running at https://localhost:' + config.port_ssl + '/');
