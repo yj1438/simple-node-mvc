@@ -3,3 +3,4 @@
 /views/*
 /static/*
 !.keep
+.DS_Store
