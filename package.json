@@ -5,16 +5,25 @@
   "private": "true",
   "dependencies": {
     "art-template": "^3.0.3",
-    "http2": "^3.2.0",
+    "http2": "^3.3.2",
+    "jquery": "^2.2.0",
     "merge": "^1.2.0",
     "q": "^1.4.1",
     "spdy": "^2.1.0",
     "string-to-stream": "^1.0.1"
   },
   "devDependencies": {
+    "babel-core": "^6.4.5",
+    "babel-loader": "^6.2.1",
+    "css-loader": "^0.23.1",
+    "extract-text-webpack-plugin": "^1.0.1",
     "gulp": "^3.9.0",
     "gulp-imagemin": "^2.4.0",
-    "gulp-tinify": "^1.0.1",
-    "imagemin-pngquant": "^4.2.0"
+    "gulp-tinify": "^1.0.2",
+    "imagemin-pngquant": "^4.2.0",
+    "less": "^2.6.0",
+    "less-loader": "^2.2.2",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.12.12"
   }
 }
