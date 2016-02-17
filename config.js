@@ -4,6 +4,8 @@
 
 module.exports = {
     
+    host: '172.16.103.241',
+    
     port_normal : '80',
 
     port_ssl : '443',

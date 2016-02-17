@@ -16,5 +16,23 @@ module.exports = [
         url: /^\/http2\/demo$/i,
         controller: 'http2',
         action: 'demo'
+    },
+    {
+        method: 'post',
+        url: /^\/ua\/getdata/i,
+        controller: 'uastatistics',
+        action: 'getdata'
+    },
+    {
+        method: 'get',
+        url: /^\/ua\/getdata/i,
+        controller: 'uastatistics',
+        action: 'getdata'
+    },
+    {
+        method: 'get',
+        url: /^\/ua\/index/i,
+        controller: 'uastatistics',
+        action: 'index'
     }
 ];

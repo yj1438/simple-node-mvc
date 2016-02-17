@@ -9,7 +9,7 @@
     "jquery": "^2.2.0",
     "merge": "^1.2.0",
     "q": "^1.4.1",
-    "spdy": "^2.1.0",
+    "spdy": "^3.2.0",
     "string-to-stream": "^1.0.1"
   },
   "devDependencies": {
