@@ -1,0 +1,117 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,blockquote,th,td {
+	margin: 0;
+	padding: 0;
+}
+body {
+	font-family: helvetica, arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+    width: 100%;
+    font-size: inherit;
+}
+fieldset,img {
+	border: 0;
+}
+address,caption,cite,code,dfn,em,strong,th,var {
+	font-style: normal;
+	font-weight: normal;
+}
+ol,ul {
+	list-style: none;
+}
+caption,th {
+	text-align: left;
+}
+q: before,q: after {
+	content: '';
+}
+select,input,textarea {
+	font: 100% "Trebuchet MS",arial,helvetica,clean,sans-serif;
+}
+pre,code {
+	font: 100% monospace;
+	*font-size: 100%;
+}
+strong {
+	font-weight: bold;
+}
+em {
+	font-style: italic;
+}
+a:link, a:visited, a:hover, a:active {
+    color: #666;
+}
+/*=====清除浮动======*/
+.clearfix {
+    zoom: 1;
+}
+.clearfix:after, .clearfix:before{
+    content: " ";
+    display: table;
+}
+.cleafix:after{
+    clear: both;
+}
+/*=====垂直居中方法1：兼容性很好======*/
+.center-box {
+  position: relative;
+}
+.center-box::before {
+  content: " ";
+  display: inline-block;
+  height: 100%;
+  width: 1%;
+  vertical-align: middle;
+}
+.center-box > .center-item{
+  display: inline-block;
+  vertical-align: middle;
+}
+/*=====垂直居中方法2：最优雅的方法，只用定义容器的属性，但有一定的兼容性，可以在移动端用================*/
+.center-box-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    display: -webkit-box;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+}
+/**/
+#header {
+	
+}
+#content {
+	
+}
+#footer {
+	clear: both;
+}
+#pageloading {
+	position: fixed;
+	_position: absolute;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	width: 80px;
+	padding: 2px;
+	text-align: center;
+	background: #c44;
+	color: #fff;
+}
+
+#img_area {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+}
+#img_area img {
+    width: 5%;
+    vertical-align: middle;
+}
