@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>HTTP/2 VS HTTP/1.1 Demo</title>
+    <link rel="stylesheet" type="text/css" href="/css/base.css">
+    <style>
+        body {
+            max-width: 740px;
+        }
+        iframe {
+            width: 100%;
+            max-width: 680px;
+        }
+        section {
+            margin: 20px;
+        }
+    </style>
+    <script type="text/javascript" src="https://localhost/js/jquery.js"></script>
+</head>
+<body>
+
+    <header>
+        <h1 style="margin: 20px;">    
+        {{title}}
+        </h1>    
+    </header>
+
+    <main>
+        <section>
+            <h2 style="text-align: center">HTTP 1.1</h2>
+            <iframe id="iframe1" frameBorder="0"></iframe>
+        </section>
+        <section>
+            <h2 style="text-align: center">HTTP 2</h2>
+            <iframe id="iframe2" frameBorder="0"></iframe>
+        </section>
+    </main>
+    
+    <footer>
+    
+    </footer>
+    <script>
+        var iframe1 = document.getElementById('iframe1'),
+            iframe_width = iframe1.scrollWidth;
+        
+        function load_frame2 () {
+            if (!document.getElementById('iframe2').src) {
+                document.getElementById('iframe2').src = 'https://localhost/http2/demo?start_time=' + new Date().getTime();
+            }
+        }
+        
+        iframe1.src = '/http2/demo?start_time=' + new Date().getTime();     
+        
+        document.getElementById('iframe1').style.height = iframe_width * 0.68 + 'px';
+        document.getElementById('iframe2').style.height = iframe_width * 0.68 + 'px';
+        
+        var index = 0;
+        window.onresize = function () {
+            if (index) {
+                clearTimeout(index);
+            }
+            index = setTimeout(function () {
+                var iframe_width = document.getElementById('iframe1').scrollWidth;
+                document.getElementById('iframe1').style.height = iframe_width * 0.68 + 'px';
+                document.getElementById('iframe2').style.height = iframe_width * 0.68 + 'px';
+            }, 300);
+        }
+    </script>
+</body>
+</html>
