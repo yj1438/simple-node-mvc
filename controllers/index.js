@@ -83,7 +83,7 @@ exports.index = function () {
                 request(UA_PARSE_URL, function (error, response, body) {
                     let uaData = makeUaData(JSON.parse(body), userAgent);
                     uaData.hashId = hashId;
-                    uaData.isSpdy = self_req.isSpdy;
+                    uaData.isSpdy = self_req.isSpdy ? 'yes' : 'no';
                     uaData.protocol = protocolMap[self_req.spdyVersion];
                     
                     if (!error && response.statusCode === 200) {

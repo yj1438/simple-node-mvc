@@ -1,7 +1,3 @@
-/**
- * @author QLeelulu@gmail.com
- * @blog http://qleelulu.cnblogs.com
- */
 
 var http = require('http'),
     https = require('https'),

@@ -21,9 +21,9 @@ var app = spdy.createServer(options, function (req, res) {
     });
 }).listen(config.port_ssl, config.host);
 
-app.on('socket', function (socket) {
-    console.log(socket.npnProtocol || socket.alpnProtocol);
-});
+//app.on('socket', function (socket) {
+//    console.log(socket.npnProtocol || socket.alpnProtocol);
+//});
 
 app.on('error', function (err){
     this.emit("err");
