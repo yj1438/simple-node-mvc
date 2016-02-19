@@ -20,6 +20,15 @@ var app = https.createServer(options, function(req, res){
             req.post = _postData;
             server.handlerRequest(req, res);
         });
-    }).listen(config.port_ssl);
-    
-console.log('HTTP/1.1 Server running at https://localhost:'+ config.port_ssl +'/');
+    }).listen(config.port_ssl, config.host, function () {
+        console.log('http/1.1 Server running at https://' + config.host + ':' + config.port_ssl + '/');
+    });
+
+/*
+ * http 方式的 redirect
+ */
+var http = require('http');
+http.createServer(function (req, res) {
+    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+    res.end();
+}).listen(config.port_normal, config.host);

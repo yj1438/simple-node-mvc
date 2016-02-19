@@ -32,6 +32,9 @@ app.on('error', function (err){
     this.emit("err");
 });
 
+/*
+ * http 方式的 redirect
+ */
 var http = require('http');
 http.createServer(function (req, res) {
     res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
