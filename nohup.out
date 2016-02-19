@@ -1,2 +1,19 @@
 SPDY Server running at https://101.200.191.40:443/
 SPDY Server running at https://101.200.191.40:443/
+SPDY Server running at https://0.0.0.0:443/
+crypto.js:70
+  this._handle.update(data, encoding);
+               ^
+
+TypeError: Not a string or buffer
+    at TypeError (native)
+    at Hash.update (crypto.js:70:16)
+    at exports.index.fs.readFile (/root/git-house/simple-node-mvc/controllers/index.js:70:10)
+    at Object.exports.handlerRequest (/root/git-house/simple-node-mvc/server.js:56:43)
+    at IncomingMessage.<anonymous> (/root/git-house/simple-node-mvc/spdy.js:21:16)
+    at emitNone (events.js:80:13)
+    at IncomingMessage.emit (events.js:179:7)
+    at endReadableNT (_stream_readable.js:906:12)
+    at nextTickCallbackWith2Args (node.js:475:9)
+    at process._tickCallback (node.js:389:17)
+SPDY Server running at https://0.0.0.0:443/
