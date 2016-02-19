@@ -24,8 +24,8 @@ function makeUaData (uaData, userAgent) {
      */
     //UC
     uaMatch = userAgent.match(/(UCBrowser)\/([\d.]+)/)                          //UC
-            || userAgent.match(/(MQQBrowser)\/([\d.]+)/)                        //QQ
             || userAgent.match(/(MicroMessenger)\/([\d.]+)/)                    //微信
+            || userAgent.match(/(MQQBrowser)\/([\d.]+)/)                        //QQ
             || userAgent.match(/(baidubrowser)\/([\d.]+)/)                      //baidu
             || userAgent.match(/(LieBaoFast)\/([\d.]+)/)                        //猎豹
             || userAgent.match(/(SogouMobileBrowser)\/([\d.]+)/)                //搜狗
