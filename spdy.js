@@ -6,8 +6,8 @@ var config = require('./config'),
     server = require('./server');
 
 var options = {
-    key: fs.readFileSync('./SSL/localhost.key'),
-    cert: fs.readFileSync('./SSL/localhost.crt')
+    key: fs.readFileSync('./SSL/certificate.key'),
+    cert: fs.readFileSync('./SSL/certificate.crt')
 };
 
 var app = spdy.createServer(options, function (req, res) {

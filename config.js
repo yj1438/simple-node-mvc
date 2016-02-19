@@ -4,7 +4,7 @@
 
 module.exports = {
     
-    host: '172.16.103.241',
+    host: '101.200.191.40',
     
     port_normal : '80',
 
