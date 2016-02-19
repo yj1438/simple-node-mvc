@@ -1,6 +1,6 @@
 .dt-grid-container {
-/*	font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;*/
-	font-family: Tahoma, Arial, "Helvetica Neue", "Hiragino Sans GB", Simsun, sans-serif;
+    font: 12px/1.5 Tahoma, Helvetica, Arial, "Microsoft YaHei", sans-serif;
+    -webkit-font-smoothing: antialiased;
 	position: relative;
 	overflow: auto;
     margin: 10px 5%;

@@ -893,7 +893,8 @@ html {
 body {
   font-family: "微软雅黑", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 12px;
-  line-height: 1.42857143;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
   color: #333333;
   background-color: #ffffff;
 }

@@ -1,23 +1,44 @@
 <!doctype html>
-<html>
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome to Yj's simple-nodejs-MVC</title>
-    <link rel="stylesheet" type="text/css" href="/module/index.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /><!-- 默认使用最新浏览器 -->
+    <meta http-equiv="Cache-Control" content="no-siteapp" /><!-- 不被网页(加速)转码 -->
+    <meta name="renderer" content="webkit" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui" />
+    <title>Welcome to HTTP/2 statistics</title>
+<!--    <link rel="stylesheet" type="text/css" href="/module/ua.css" />-->
+    <style>
+        body {
+            font-family: "Helvetica Neue", "Microsoft YaHei", Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            max-width: 960px;
+            margin: 5em auto;
+        }
+        h1 {
+            text-align: center;
+        }
+        #main_page > *{
+            font-size: 18px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                margin: 5em 1em;
+            }
+        }
+    </style>
 </head>
 <body>
-
 <h1>
     {{title}}
 </h1>
     
     <section id="main_page">
         <p>{{userAgent}}</p>
-        <p>{{isSpdy}}</p>
-        <p>协议类型： {{protocol}}</p>
+        <p style="font-size: 24px;">{{isSpdy}}</p>
+        <h2 style="font-size: 24px;">协议类型： {{protocol}}</h2>
     </section>
-    
-    
-<!--<script type="text/javascript" src="/module/index.js"></script>-->
 </body>
 </html>

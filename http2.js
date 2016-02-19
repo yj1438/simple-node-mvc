@@ -5,8 +5,9 @@ var config = require('./config'),
     server = require('./server');
 
 var options = {
-    key: fs.readFileSync('./SSL/localhost.key'),
-    cert: fs.readFileSync('./SSL/localhost.crt')
+    key: fs.readFileSync('./SSL/3_www.h2statistics.ml.key'),
+    cert: fs.readFileSync('./SSL/2_www.h2statistics.ml.crt'),
+    ca: fs.readFileSync('./SSL/1_root_bundle.crt')
 };
 
 var app = http2.createServer(options, function (req, res) {

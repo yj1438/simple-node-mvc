@@ -25,6 +25,7 @@ function makeUaData (uaData, userAgent) {
     //UC
     uaMatch = userAgent.match(/(UCBrowser)\/([\d.]+)/)                          //UC
             || userAgent.match(/(MQQBrowser)\/([\d.]+)/)                        //QQ
+            || userAgent.match(/(MicroMessenger)\/([\d.]+)/)                    //微信
             || userAgent.match(/(baidubrowser)\/([\d.]+)/)                      //baidu
             || userAgent.match(/(LieBaoFast)\/([\d.]+)/)                        //猎豹
             || userAgent.match(/(SogouMobileBrowser)\/([\d.]+)/)                //搜狗
@@ -101,7 +102,7 @@ exports.index = function () {
         }
     });
     
-    data.title = "Welcome to yj's simple-nodejs-mvc";
+    data.title = "Welcome to HTTP/2 statistics";
     data.userAgent = userAgent;
     data.isSpdy = '当前客户端' + (this.req.isSpdy ? '支持' : '不支持') + ' SPDY/H2 !!!';
     data.protocol = protocolMap[this.req.spdyVersion];
