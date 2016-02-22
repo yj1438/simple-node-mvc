@@ -66,15 +66,22 @@ exports.index = function () {
         UA_PARSE_URL = 'http://www.useragentstring.com/?uas=' + encodeURIComponent(userAgent) + '&getJSON=all';
     
     //取 HASH
+    let hashId;
     try {
         let hash = crypto.createHash('sha256');
         hash.update(userAgent);
-        let hashId = hash.digest('hex');
+        hashId = hash.digest('hex');
     } catch (err) {
+	hashId = null;
         throw err;
         console.log(new Date() + ": " + userAgent);
     }
     
+    if (!hashId) {
+        this.renderJson({info: userAgent});
+	return;
+    }
+
     //us hash 进行过滤
     fs.readFile('data/hash.json', 'utf8', (err, data) => {
         if (err)
