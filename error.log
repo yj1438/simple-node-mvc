@@ -1,0 +1,105 @@
+undefined:1
+undefined
+^
+
+SyntaxError: Unexpected token u
+    at Object.parse (native)
+    at Request._callback (/root/git-house/simple-node-mvc/controllers/index.js:97:50)
+    at self.callback (/root/git-house/simple-node-mvc/node_modules/request/request.js:199:22)
+    at emitOne (events.js:90:13)
+    at Request.emit (events.js:182:7)
+    at Request.onRequestError (/root/git-house/simple-node-mvc/node_modules/request/request.js:821:8)
+    at emitOne (events.js:90:13)
+    at ClientRequest.emit (events.js:182:7)
+    at Socket.socketErrorListener (_http_client.js:262:9)
+    at emitOne (events.js:90:13)
+undefined:1
+undefined
+^
+
+SyntaxError: Unexpected token u
+    at Object.parse (native)
+    at Request._callback (/root/git-house/simple-node-mvc/controllers/index.js:97:50)
+    at self.callback (/root/git-house/simple-node-mvc/node_modules/request/request.js:199:22)
+    at emitOne (events.js:90:13)
+    at Request.emit (events.js:182:7)
+    at Request.onRequestError (/root/git-house/simple-node-mvc/node_modules/request/request.js:821:8)
+    at emitOne (events.js:90:13)
+    at ClientRequest.emit (events.js:182:7)
+    at Socket.socketErrorListener (_http_client.js:262:9)
+    at emitOne (events.js:90:13)
+undefined:1
+undefined
+^
+
+SyntaxError: Unexpected token u
+    at Object.parse (native)
+    at Request._callback (/root/git-house/simple-node-mvc/controllers/index.js:97:50)
+    at self.callback (/root/git-house/simple-node-mvc/node_modules/request/request.js:199:22)
+    at emitOne (events.js:90:13)
+    at Request.emit (events.js:182:7)
+    at Request.onRequestError (/root/git-house/simple-node-mvc/node_modules/request/request.js:821:8)
+    at emitOne (events.js:90:13)
+    at ClientRequest.emit (events.js:182:7)
+    at Socket.socketErrorListener (_http_client.js:262:9)
+    at emitOne (events.js:90:13)
+undefined:1
+undefined
+^
+
+SyntaxError: Unexpected token u
+    at Object.parse (native)
+    at Request._callback (/root/git-house/simple-node-mvc/controllers/index.js:97:50)
+    at self.callback (/root/git-house/simple-node-mvc/node_modules/request/request.js:199:22)
+    at emitOne (events.js:90:13)
+    at Request.emit (events.js:182:7)
+    at Request.onRequestError (/root/git-house/simple-node-mvc/node_modules/request/request.js:821:8)
+    at emitOne (events.js:90:13)
+    at ClientRequest.emit (events.js:182:7)
+    at Socket.socketErrorListener (_http_client.js:262:9)
+    at emitOne (events.js:90:13)
+undefined:1
+undefined
+^
+
+SyntaxError: Unexpected token u
+    at Object.parse (native)
+    at Request._callback (/root/git-house/simple-node-mvc/controllers/index.js:97:50)
+    at self.callback (/root/git-house/simple-node-mvc/node_modules/request/request.js:199:22)
+    at emitOne (events.js:90:13)
+    at Request.emit (events.js:182:7)
+    at Request.onRequestError (/root/git-house/simple-node-mvc/node_modules/request/request.js:821:8)
+    at emitOne (events.js:90:13)
+    at ClientRequest.emit (events.js:182:7)
+    at Socket.socketErrorListener (_http_client.js:262:9)
+    at emitOne (events.js:90:13)
+undefined:1
+undefined
+^
+
+SyntaxError: Unexpected token u
+    at Object.parse (native)
+    at Request._callback (/root/git-house/simple-node-mvc/controllers/index.js:97:50)
+    at self.callback (/root/git-house/simple-node-mvc/node_modules/request/request.js:199:22)
+    at emitOne (events.js:90:13)
+    at Request.emit (events.js:182:7)
+    at Request.onRequestError (/root/git-house/simple-node-mvc/node_modules/request/request.js:821:8)
+    at emitOne (events.js:90:13)
+    at ClientRequest.emit (events.js:182:7)
+    at Socket.socketErrorListener (_http_client.js:262:9)
+    at emitOne (events.js:90:13)
+undefined:1
+undefined
+^
+
+SyntaxError: Unexpected token u
+    at Object.parse (native)
+    at Request._callback (/root/git-house/simple-node-mvc/controllers/index.js:97:50)
+    at self.callback (/root/git-house/simple-node-mvc/node_modules/request/request.js:199:22)
+    at emitOne (events.js:90:13)
+    at Request.emit (events.js:182:7)
+    at Request.onRequestError (/root/git-house/simple-node-mvc/node_modules/request/request.js:821:8)
+    at emitOne (events.js:90:13)
+    at ClientRequest.emit (events.js:182:7)
+    at Socket.socketErrorListener (_http_client.js:262:9)
+    at emitOne (events.js:90:13)
