@@ -265,3 +265,45 @@ SyntaxError: Unexpected token u
     at Socket.socketErrorListener (_http_client.js:262:9)
     at emitOne (events.js:90:13)
 SPDY Server running at https://0.0.0.0:443/
+add new userAgent7502c05143ef5ca8c934b5e6e8a66220bb31decb577247c40a4be803a222df37
+add new userAgente06ba7d6acfe685693e1d71af40a24ea72455d3b399e7ce725214c4806808cbe
+undefined:1
+undefined
+^
+
+SyntaxError: Unexpected token u
+    at Object.parse (native)
+    at Request._callback (/root/git-house/simple-node-mvc/controllers/index.js:85:50)
+    at self.callback (/root/git-house/simple-node-mvc/node_modules/request/request.js:199:22)
+    at emitOne (events.js:90:13)
+    at Request.emit (events.js:182:7)
+    at Request.onRequestError (/root/git-house/simple-node-mvc/node_modules/request/request.js:821:8)
+    at emitOne (events.js:90:13)
+    at ClientRequest.emit (events.js:182:7)
+    at Socket.socketErrorListener (_http_client.js:262:9)
+    at emitOne (events.js:90:13)
+SPDY Server running at https://0.0.0.0:443/
+add new userAgent4c4efd7c00eaa111cb8d1e0f8341752b476dc07e918bd1fe6ae535b4032f1826
+add new userAgent048f85854e855feecac1d3597d1b1e7287dae021cf3ac7b71c8a480da8bda4d8
+add new userAgent9882517ddc06a22b330d47e2567a77a6fb41b98ae1fb5def118b4b40a81b9baf
+add new userAgent903a2cd549bcefedcd7d443d60bbc8e6cef19f94d51638c45a0a53ccd32e752a
+add new userAgent2c18572533bdf30c414cec217599750e13fc6cbe1c517dc964493b66c3647ff1
+add new userAgent4c09086f01f1067691967888a91ed9c95412c93d4360739d84f3f2c830da2e00
+add new userAgent7aef4a402d3a7ee102d17e5bbb874789c7f6ff424914abd23ad2f4a6c234455b
+add new userAgentb3a2a913dd749402155e4f9ad8edd618147a89ae16b2cba912d30d13bcb074b5
+undefined:1
+undefined
+^
+
+SyntaxError: Unexpected token u
+    at Object.parse (native)
+    at Request._callback (/root/git-house/simple-node-mvc/controllers/index.js:85:50)
+    at self.callback (/root/git-house/simple-node-mvc/node_modules/request/request.js:199:22)
+    at emitOne (events.js:90:13)
+    at Request.emit (events.js:182:7)
+    at Request.onRequestError (/root/git-house/simple-node-mvc/node_modules/request/request.js:821:8)
+    at emitOne (events.js:90:13)
+    at ClientRequest.emit (events.js:182:7)
+    at Socket.socketErrorListener (_http_client.js:262:9)
+    at emitOne (events.js:90:13)
+SPDY Server running at https://0.0.0.0:443/
