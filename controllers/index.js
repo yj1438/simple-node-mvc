@@ -72,14 +72,14 @@ exports.index = function () {
         hash.update(userAgent);
         hashId = hash.digest('hex');
     } catch (err) {
-	hashId = null;
         throw err;
         console.log(new Date() + ": " + userAgent);
+        hashId = null;
     }
     
     if (!hashId) {
         this.renderJson({info: userAgent});
-	return;
+        return;
     }
 
     //us hash 进行过滤
