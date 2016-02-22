@@ -22,6 +22,23 @@ function getUAList (callback) {
     });
 }
 
+exports.sortId = function () {
+    let self = this;
+    getUAList(function (data) {
+        let hashIds = [];
+        for (let value of data) {
+            hashIds.push(value.hashId);
+        }
+        fs.writeFile('data/hash.json', hashIds.join("\n"), 'utf8', (err) => {
+            if (err) {
+                self.renderJson(err);
+            } else {
+                self.renderJson({total: hashIds.length});
+            }
+        });
+    });
+};
+
 //统计 UA 列表页
 exports.index = function () {
     this.render('ua/index', {});

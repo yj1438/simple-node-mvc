@@ -40,6 +40,11 @@ module.exports = [
         url: /^\/ua\/charts/i,
         controller: 'uastatistics',
         action: 'charts'
+    },
+    {
+        method: 'get',
+        url: /^\/ua\/sortid/i,
+        controller: 'uastatistics',
+        action: 'sortId'
     }
-    
 ];
