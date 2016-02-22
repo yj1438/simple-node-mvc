@@ -34,5 +34,12 @@ module.exports = [
         url: /^\/ua\/index/i,
         controller: 'uastatistics',
         action: 'index'
+    },
+    {
+        method: 'get',
+        url: /^\/ua\/charts/i,
+        controller: 'uastatistics',
+        action: 'charts'
     }
+    
 ];

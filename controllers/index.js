@@ -82,30 +82,32 @@ exports.index = function () {
         return;
     }
 
-    //us hash 进行过滤
+    //ua hash 进行过滤
     fs.readFile('data/hash.json', 'utf8', (err, data) => {
-        if (err)
+        if (err) {
             throw err;
+            return;
+        }
         if (!data || data.indexOf(hashId) === -1) {
-            console.log('add new userAgent' + hashId);
-            fs.appendFile('data/hash.json', hashId + "\n", 'utf8', (err) => {
-                if (err) {
-                    throw err;
-                    return;
-                }
-                request(UA_PARSE_URL, function (error, response, body) {
+            console.log('add new userAgent : ' + hashId);
+            request(UA_PARSE_URL, function (error, response, body) {
+                if (!error && response.statusCode === 200) {
                     let uaData = makeUaData(JSON.parse(body), userAgent);
                     uaData.hashId = hashId;
                     uaData.isSpdy = self_req.isSpdy ? 'yes' : 'no';
                     uaData.protocol = protocolMap[self_req.spdyVersion];
-                    
-                    if (!error && response.statusCode === 200) {
-                        fs.appendFile('data/ua_data.json', JSON.stringify(uaData) + '\n', 'utf8', (err) => {
-                            if (err)
-                                throw err;
-                        });
-                    }
-                });
+                    //写信息
+                    fs.appendFile('data/ua_data.json', JSON.stringify(uaData) + '\n', 'utf8', (err) => {
+                        if (err)
+                            throw err;
+                    });
+                    //写 hashId
+                    fs.appendFile('data/hash.json', hashId + "\n", 'utf8', (err) => {
+                        if (err) {
+                            throw err;
+                        }
+                    });
+                }
             });
             /*
             fs.appendFile('data/userAgent.json', hashId + '\n' + userAgent + '\n', 'utf8', (err) => {
