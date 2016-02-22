@@ -66,9 +66,14 @@ exports.index = function () {
         UA_PARSE_URL = 'http://www.useragentstring.com/?uas=' + encodeURIComponent(userAgent) + '&getJSON=all';
     
     //取 HASH
-    let hash = crypto.createHash('sha256');
-    hash.update(userAgent);
-    let hashId = hash.digest('hex');
+    try {
+        let hash = crypto.createHash('sha256');
+        hash.update(userAgent);
+        let hashId = hash.digest('hex');
+    } catch (err) {
+        throw err;
+        console.log(new Date() + ": " + userAgent);
+    }
     
     //us hash 进行过滤
     fs.readFile('data/hash.json', 'utf8', (err, data) => {
@@ -95,10 +100,12 @@ exports.index = function () {
                     }
                 });
             });
-//            fs.appendFile('data/userAgent.json', hashId + '\n' + userAgent + '\n', 'utf8', (err) => {
-//                if (err)
-//                    throw err;
-//            });
+            /*
+            fs.appendFile('data/userAgent.json', hashId + '\n' + userAgent + '\n', 'utf8', (err) => {
+                if (err)
+                    throw err;
+            });
+            */
         }
     });
     
