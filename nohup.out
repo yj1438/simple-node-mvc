@@ -307,3 +307,25 @@ SyntaxError: Unexpected token u
     at Socket.socketErrorListener (_http_client.js:262:9)
     at emitOne (events.js:90:13)
 SPDY Server running at https://0.0.0.0:443/
+add new userAgent606cbf38410487362d3ef6f99727a9c9ea7e7487772a2fcb54cf5918f0963987
+add new userAgent3dfdefbcd9d95ee1705f1c9dad60dad784fd6a4803bcf4b0e382470fbf295588
+add new userAgent4058b2832c247c42990be039a1e05bcdaf5c79bd99b81805cdc1884dffecffad
+add new userAgentf585c7520c0659874ba1738174f11a3ddf3a8bafd36fbcbfdb17f49952b3b99b
+add new userAgent1d6c126067735a43447b8d3c975b3d9a4966d396017b38e711ad16abcc35a089
+add new userAgentdf6f9c9704a2041173a919ad026836c626682c77dea67753064f9ce341f94826
+add new userAgent78b8e793ac2bd72309eaa9ccd9ee824936e5afcf82e6d4a444af2b5eab725220
+undefined:1
+undefined
+^
+
+SyntaxError: Unexpected token u
+    at Object.parse (native)
+    at Request._callback (/root/git-house/simple-node-mvc/controllers/index.js:85:50)
+    at self.callback (/root/git-house/simple-node-mvc/node_modules/request/request.js:199:22)
+    at emitOne (events.js:90:13)
+    at Request.emit (events.js:182:7)
+    at Request.onRequestError (/root/git-house/simple-node-mvc/node_modules/request/request.js:821:8)
+    at emitOne (events.js:90:13)
+    at ClientRequest.emit (events.js:182:7)
+    at Socket.socketErrorListener (_http_client.js:262:9)
+    at emitOne (events.js:90:13)
