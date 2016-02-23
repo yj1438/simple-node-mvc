@@ -72,7 +72,7 @@ exports.index = function () {
         hash.update(userAgent);
         hashId = hash.digest('hex');
     } catch (err) {
-        throw err;
+        //throw err;
         console.log(new Date() + ": " + userAgent);
         hashId = null;
     }
