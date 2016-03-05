@@ -1,42 +1,7 @@
 'use strict';
-const fs = require('fs');
-const readline = require('readline');
-
-/**
- * 从数据文件中取数据
- */
-function getUAList (callback) {
-    let uaListData = [];
-    
-    if (typeof callback !== 'function') {
-        return;
-    }
-    
-    const rl = readline.createInterface({
-        input: fs.createReadStream('data/ua_data.json')
-    });
-    rl.on('line', (line) => {
-        uaListData.push(JSON.parse(line));
-    }).on('close', () => {
-        callback(uaListData);
-    });
-}
+const http2Service = require('../service/http2Service');
 
 exports.sortId = function () {
-    let self = this;
-    getUAList(function (data) {
-        let hashIds = [];
-        for (let value of data) {
-            hashIds.push(value.hashId);
-        }
-        fs.writeFile('data/hash.json', hashIds.join("\n"), 'utf8', (err) => {
-            if (err) {
-                self.renderJson(err);
-            } else {
-                self.renderJson({total: hashIds.length});
-            }
-        });
-    });
 };
 
 //统计 UA 列表页
@@ -44,47 +9,70 @@ exports.index = function () {
     this.render('ua/index', {});
 };
 
-//取列表 JSON 数据
+//"pageSize":20,"startRecord":0,"nowPage":1, exhibitDatas, recordCount, pageCount, isSuccess
 exports.getdata = function () {
-    let self = this;
-    getUAList (function (data) {
-        self.renderJson(data);
-        /*
-        {
-            isSuccess: true,
-            exhibitDatas: uaListData,
-            pageSize: params.pageSize,
-            nowPage: params.nowPage,
-            recordCount: uaListData.length,
-            pageCount: Math.ceil(uaListData.length / 20)
+    let _params = JSON.parse(this.params.dtGridPager);
+    let page = {
+        nowPage: _params.nowPage,
+        pageSize: _params.pageSize
+    };
+    http2Service.findPage(page, (err, rows) => {
+        if (err) {
+            console.log(err);
+            this.renderJson(Object.assign({}, _params, {isSuccess: false}));
+        } else {
+            let resultList = rows[0],
+                total = parseInt(rows[1][0].total, 10);
+            resultList.map((value, index) => {
+                value.is_spdy = value.is_spdy ? 'yes' : 'no';
+                return value;
+            });
+            let pageCount = Math.ceil(total / page.pageSize);
+            this.renderJson(Object.assign({}, _params, {isSuccess: true, exhibitDatas: rows[0], recordCount: total, pageCount: pageCount}));
         }
-        */
+    });
+}
+
+//取列表 JSON 数据
+exports.getalldata = function () {
+    http2Service.findAll((err, rows) => {
+        if (err) {
+            console.log(err);
+            this.renderJson([]);
+        } else {
+            rows.map((value, index) => {
+                value.is_spdy = value.is_spdy ? 'yes' : 'no'
+                return value;
+            });
+            this.renderJson(rows);
+        }
     });
 };
 
 //统计 UA 图表页
 exports.charts = function () {
-    let self = this;
-    getUAList (function (data) {
-        let statistics = {},
-            total = data.length,
-            resultData = [];
-        for (let value of data) {
-            if (!statistics[value.protocol]) {
-                statistics[value.protocol] = 0;
-            }
-            statistics[value.protocol] = statistics[value.protocol] + 1;
-        }
-        for (let key in statistics) {
-            if (statistics.hasOwnProperty(key)) {
+    
+    http2Service.countProtocal((err, rows) => {
+        if (err) {
+            console.log(err);
+            this.render('ua/charts', {data: null, total: 0});
+        } else {
+            //计算全部
+            let total = 0,
+                resultData = [];
+            for(let value of rows) {
+                total = total + parseInt(value.num, 10);
                 resultData.push({
-                    name: key,
-                    num: statistics[key],
-                    y: parseFloat((statistics[key] / total).toFixed(4)) * 100
+                    name: value.protocol,
+                    num: value.num
                 });
             }
+            resultData.map((value, index) => {
+                value.y = (value.num / total).toFixed(4) * 100;
+                return value;
+            })
+            this.render('ua/charts', {data: JSON.stringify(resultData), total: total});
         }
-        self.render('ua/charts', {data: JSON.stringify(resultData), total: data.length});
-//        self.renderJson(statistics);
     });
+    
 };

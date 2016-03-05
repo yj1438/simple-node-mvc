@@ -8,6 +8,7 @@
     "http2": "^3.3.2",
     "jquery": "^2.2.0",
     "merge": "^1.2.0",
+    "mysql": "github:felixge/node-mysql",
     "q": "^1.4.1",
     "request": "^2.69.0",
     "spdy": "^3.2.0",

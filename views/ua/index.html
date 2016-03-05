@@ -25,12 +25,6 @@
     <script type="text/javascript" src="/lib/jquery.dtGrid.js"></script>
     <script type="text/javascript" src="/lib/i18n/zh-cn.js"></script>
     <link rel="stylesheet" type="text/css" href="/lib/jquery.dtGrid.css" />
-    <!-- datePicker -->
-<!--
-    <script type="text/javascript" src="/lib/dependents/datePicker/WdatePicker.js" defer="defer"></script>
-    <link rel="stylesheet" type="text/css" href="/lib/dependents/datePicker/skin/WdatePicker.css" />
-    <link rel="stylesheet" type="text/css" href="/lib/dependents/datePicker/skin/default/datepicker.css" />
--->
 </head>
 <body>
     
@@ -47,26 +41,26 @@
 <script type="text/javascript">
     (function (global, $, undefined) {
         var gridColumns = [
-            {id:'hashId', title:'ID', type:'string', hideType: 'lg|md|sm|xs'},
+            {id:'hash_id', title:'ID', type:'string', hideType: 'lg|md|sm|xs'},
             {id:'os_name', title:'平台类型', type:'string'},
             {id:'os_version', title:'平台版本', type:'string'},
             {id:'agent_name', title:'终端名称', type:'string'},
             {id:'agent_version', title:'终端版本', type:'string'},
-            {id:'isSpdy', title:'H2是否可用', type:'string'},
+            {id:'is_spdy', title:'H2是否可用', type:'string'},
             {id:'protocol', title:'协议版本', type:'string'},
-            {id:'uaString', title:'原始 userAgent', type:'string', hideType:'lg|md|sm|xs'},
+            {id:'ua_string', title:'原始 userAgent', type:'string', hideType:'lg|md|sm|xs'},
         ];
         var girdOption = {
             lang: 'zh-cn',
             ajaxLoad: true,
             loadURL: '/ua/getdata',
-            loadAll: true,
+//            loadAll: true,
             columns: gridColumns, 
             gridContainer: 'grid_container',
             toolbarContainer: 'grid_tool',
             tools : '',
             pageSize: 20,
-            pageSizeLimit: [10, 20, 50]
+            pageSizeLimit: [20, 50, 100]
         };
         var grid = $.fn.DtGrid.init(girdOption);
         grid.load();
