@@ -115,7 +115,6 @@ exports.index = function () {
                         return;
                     }
                     //补充其它信息
-                    console.log(uaData);
                     uaData.hash_id = hashId;
                     uaData.is_spdy = this.req.isSpdy ? 1 : 0;
                     uaData.protocol = protocolMap[this.req.spdyVersion];
