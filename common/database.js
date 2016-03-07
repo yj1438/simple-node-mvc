@@ -2,15 +2,15 @@
 const Mysql = require('mysql');
 
 const dbInfo = {
-    host: 'localhost',
+    host: '172.16.9.142',
     user: 'root',
-    password: 'babytree.COM',
+    password: 'root',
     database: 'http2',
     multipleStatements: true,
     acquireTimeout: 3000,
     waitForConnections: true,
-    connectionLimit: 1000,
-    queueLimit: 1000
+    connectionLimit: 2048,
+    queueLimit: 600
 };
 
 let pool = Mysql.createPool(dbInfo);
