@@ -3,3 +3,5 @@
 !.keep
 .DS_Store
 nohup.out
+error.log
+out.log
