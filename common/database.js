@@ -2,9 +2,9 @@
 const Mysql = require('mysql');
 
 const dbInfo = {
-    host: '172.16.9.142',
+    host: 'localhost',
     user: 'root',
-    password: 'root',
+    password: 'babytree.COM',
     database: 'http2',
     multipleStatements: true,
     acquireTimeout: 3000,
