@@ -26,3 +26,11 @@ exports.addCTR = function(data, callback) {
          + " ON DUPLICATE KEY UPDATE " + protocol + " = " + protocol + " + 1;";
     Database.handle(sql, {}, callback || () => {});
 }
+
+
+/**
+ * 根据 ref 获取此条记录
+ */
+exports.findByRef = function(ref, callback) {
+    Database.handle('SELECT * FROM stat_ref a WHERE a.ref = ?', ref, callback);
+}

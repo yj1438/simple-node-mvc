@@ -24,8 +24,12 @@
     
 <div id="grid_container" class="dt-grid-container">
     <h1>SPDY/H2 终端统计</h1>
-    <div style="overflow: hidden; width: 768px; margin: 10px auto;">
-        <a href="/ua/index" style="font-size: 18px;">查看统计列表</a>
+    <div style="overflow: hidden; width: 768px; margin: 10px auto;font-size: 18px;">
+        {{if ref}}
+        <p>统计来源：{{ref}}</p>
+        {{else}}
+        <a href="/ua/index">查看统计列表</a>
+        {{/if}}
     </div>
     <div id="container"></div>
 </div>

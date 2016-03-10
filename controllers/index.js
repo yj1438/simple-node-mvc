@@ -155,13 +155,13 @@ exports.index = function () {
     /*
      * 对来源 ref 进行统计
      */
-    let ref = this.params.ref;
+    let ref = this.params.ref ? decodeURIComponent(this.params.ref) : null;
     if (ref) {
         //制作 HASHID
         let refId, refData = {};
         try {
             let hash = crypto.createHash('sha256');
-            hash.update(userAgent);
+            hash.update(ref);
             refId = hash.digest('hex');
         } catch (err) {
             //throw err;
