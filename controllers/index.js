@@ -2,9 +2,10 @@
 const request = require('request'),
       fs = require('fs'),
       crypto = require('crypto'),
-      DataStore = require('../common/dataStore');
+      CtrCache = require('../common/CtrCache');
 
-const http2Service = require('../service/http2Service');
+const http2Service = require('../service/http2Service'),
+      refService = require('../service/refService');
 
 const protocolMap = {
     '1': 'http 1.x',
@@ -14,6 +15,7 @@ const protocolMap = {
     '4': 'http 2'
 };
 
+let uaDataStore = new CtrCache();
 
 /*
  * 生成格式化的 uaData
@@ -105,16 +107,14 @@ exports.index = function () {
         return;
     }
     
-    
-    
     //进行去重性的添加
-    if (DataStore.has(hashId)) {
+    if (uaDataStore.has(hashId)) {
         //console.log('正在处理' + hashId + '...');
     } else {
-        DataStore.add(hashId);
+        uaDataStore.add(hashId);
         http2Service.findByHashid(hashId, (err, rows) => {
             if (err) {
-                DataStore.remove(hashId);
+                uaDataStore.remove(hashId);
                 console.log(err);
                 //this.handler500(this.req, this.res, err);
             } else {
@@ -122,34 +122,57 @@ exports.index = function () {
                     /*
                      * 此处有问题，从 AG 网站请求回来的间隙内有可能有一样 hash_id 的请求到来
                      * 此时还没有入表，所以会造成重复 hash_id 入表的情况
-                     * 所以有了DataStore
+                     * 所以有了uaDataStore
                      */
                     makeUaData(userAgent, (uaData) => {
                         if (!uaData) {
-                            DataStore.remove(hashId);
+                            uaDataStore.remove(hashId);
                             return;
                         }
                         //补充其它信息
                         uaData.hash_id = hashId;
                         uaData.is_spdy = this.req.isSpdy ? 1 : 0;
                         uaData.protocol = protocolMap[this.req.spdyVersion];
-                        uaData.ctr = DataStore.getCTR(hashId);
+                        uaData.ctr = uaDataStore.getCTR(hashId);
                         http2Service.add(uaData, (err, result) => {
                             if (err) {
                                 console.log(err);
                             } else {
                                 console.log(result.insertId + '+++' + hashId);
                             }
-                            DataStore.remove(hashId);
+                            uaDataStore.remove(hashId);
                         });
                     });
                 } else {
-                    http2Service.addCTR(hashId, DataStore.getCTR(hashId));
-                    DataStore.remove(hashId);
+                    http2Service.addCTR(hashId, uaDataStore.getCTR(hashId));
+                    uaDataStore.remove(hashId);
                     //是否将已有的这个记录加点击
                 }
             }
         });
+    }
+    
+    /*
+     * 对来源 ref 进行统计
+     */
+    let ref = this.params.ref;
+    if (ref) {
+        //制作 HASHID
+        let refId, refData = {};
+        try {
+            let hash = crypto.createHash('sha256');
+            hash.update(userAgent);
+            refId = hash.digest('hex');
+        } catch (err) {
+            //throw err;
+            refId = null;
+        }
+        if (refId) {
+            refData.id = refId;
+            refData.ref = ref;
+            refData.protocol = this.req.spdyVersion;
+            refService.addCTR(refData);
+        }
     }
     
     data.title = "Welcome to HTTP/2 statistics";
