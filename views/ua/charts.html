@@ -38,7 +38,8 @@
 <script type="text/javascript">
     var statistics = {
         data: {{#data}},
-        total: {{#total}}
+        total: {{#total}},
+        ref: '{{#ref}}'
     };
         
     $('#container').highcharts({
@@ -49,7 +50,7 @@
             text: 'Terminal device HTTP/2 support statistics. '
         },
         subtitle: {
-            text: '总共取样终端浏览器 ' + statistics.total + '个'
+            text: statistics.ref ? ('统计 PV 总共' + statistics.total + '次') : ('总共取样终端浏览器 ' + statistics.total + ' 个')
         },
         plotOptions: {
             series: {

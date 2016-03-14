@@ -10,7 +10,7 @@
     "merge": "^1.2.0",
     "mysql": "github:felixge/node-mysql",
     "request": "^2.69.0",
-    "spdy": "^3.2.0",
+    "spdy": "^3.2.3",
     "string-to-stream": "^1.0.1"
   },
   "devDependencies": {

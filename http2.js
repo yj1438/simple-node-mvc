@@ -17,7 +17,7 @@ var app = http2.createServer(options, function (req, res) {
         _postData += chunk;
     }).on('end', function () {
         req.post = _postData;
-//        server push 的例子，在频繁请求下会出错，还不清楚是什么情况
+        //server push 的例子，在频繁请求下会出错，还不清楚是什么情况
         if (req.url.indexOf('http2/demo') > -1 && res.push) {
             var push = res.push('/js/jquery-2.1.4.js');
             push.writeHead(200,{'content-type': 'text/javascript'});

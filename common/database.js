@@ -2,7 +2,7 @@
 const Mysql = require('mysql');
 
 const dbInfo = {
-    host: 'localhost',
+    host: '172.16.9.142',
     user: 'root',
     password: 'root',
     database: 'http2',
