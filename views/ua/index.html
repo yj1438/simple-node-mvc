@@ -43,12 +43,13 @@
         var gridColumns = [
             {id:'hash_id', title:'ID', type:'string', hideType: 'lg|md|sm|xs'},
             {id:'os_name', title:'平台类型', type:'string'},
-            {id:'os_version', title:'平台版本', type:'string'},
+            {id:'os_version', title:'平台版本', type:'string', hideType: 'sm|xs'},
             {id:'agent_name', title:'终端名称', type:'string'},
-            {id:'agent_version', title:'终端版本', type:'string'},
+            {id:'agent_version', title:'终端版本', type:'string', hideType: 'sm|xs'},
             {id:'is_spdy', title:'H2是否可用', type:'string'},
             {id:'protocol', title:'协议版本', type:'string'},
             {id:'ua_string', title:'原始 userAgent', type:'string', hideType:'lg|md|sm|xs'},
+            {id:'ctr', title:'点击量', type:'string', hideType:'xs'},
         ];
         var girdOption = {
             lang: 'zh-cn',
