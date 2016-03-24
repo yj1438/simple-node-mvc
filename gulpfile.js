@@ -1,3 +1,4 @@
+'use strict';
 var gulp = require('gulp'),
     tinify = require('gulp-tinify'),
     imagemin = require('gulp-imagemin'),

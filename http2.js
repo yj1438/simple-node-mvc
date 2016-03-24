@@ -1,3 +1,4 @@
+'use strict';
 var http2 = require('http2'),
     fs = require('fs'),
     path = require('path');
@@ -20,7 +21,7 @@ var app = http2.createServer(options, function (req, res) {
         //server push 的例子，在频繁请求下会出错，还不清楚是什么情况
         if (req.url.indexOf('http2/demo') > -1 && res.push) {
             var push = res.push('/js/jquery-2.1.4.js');
-            push.writeHead(200,{'content-type': 'text/javascript'});
+            push.writeHead(200, {'content-type': 'text/javascript'});
             fs.createReadStream(path.join(__dirname, '/static/js/jquery-2.1.4.js')).pipe(push);
         }
         server.handlerRequest(req, res);
@@ -34,6 +35,6 @@ var app = http2.createServer(options, function (req, res) {
  */
 var http = require('http');
 http.createServer(function (req, res) {
-    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+    res.writeHead(301, { "Location": "https://" + req.headers.host + req.url });
     res.end();
 }).listen(config.port_normal, config.host);

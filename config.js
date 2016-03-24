@@ -17,4 +17,4 @@ module.exports = {
     cacheControl : 7 * 24 * 3600            //浏览器缓存时间（秒）
 //    cacheControl : 0            //浏览器缓存时间（秒）
     
-}
+};

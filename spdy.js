@@ -1,5 +1,5 @@
+'use strict';
 var spdy = require('spdy'),
-    str2steam = require('string-to-stream'),
     fs = require('fs');
 
 var config = require('./config'),
@@ -28,7 +28,7 @@ var app = spdy.createServer(options, function (req, res) {
 //    console.log(socket.npnProtocol || socket.alpnProtocol);
 //});
           
-app.on('error', function (err){
+app.on('error', function (err) {
     this.emit("err");
 });
 
@@ -37,7 +37,7 @@ app.on('error', function (err){
  */
 var http = require('http');
 http.createServer(function (req, res) {
-    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+    res.writeHead(301, { "Location": "https://" + req.headers.host + req.url });
     res.end();
 }).listen(config.port_normal, config.host);
 

@@ -1,6 +1,6 @@
 
-var http = require('http'),
-    https = require('https'),
+'use strict';
+var https = require('https'),
     fs = require('fs'),
     config = require('./config'),
     server = require('./server');
@@ -11,12 +11,12 @@ var options = {
     ca: fs.readFileSync('./SSL/1_root_bundle.crt')
 };
 
-var app = https.createServer(options, function(req, res){
+var app = https.createServer(options, function (req, res) {
         var _postData = '';
         //on用于添加一个监听函数到一个特定的事件
-        req.on('data', function(chunk){
+        req.on('data', function (chunk) {
             _postData += chunk;
-        }).on('end', function(){
+        }).on('end', function () {
             req.post = _postData;
             server.handlerRequest(req, res);
         });
@@ -29,6 +29,6 @@ var app = https.createServer(options, function(req, res){
  */
 var http = require('http');
 http.createServer(function (req, res) {
-    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+    res.writeHead(301, { "Location": "https://" + req.headers.host + req.url });
     res.end();
 }).listen(config.port_normal, config.host);
