@@ -24,10 +24,6 @@ var app = spdy.createServer(options, function (req, res) {
     console.log('SPDY Server running at https://' + config.host + ':' + config.port_ssl + '/');
 });
 
-//app.on('socket', function (socket) {
-//    console.log(socket.npnProtocol || socket.alpnProtocol);
-//});
-          
 app.on('error', function (err) {
     this.emit("err");
 });

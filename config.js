@@ -14,7 +14,10 @@ module.exports = {
                 
     gzip : true,                            //是否开启 GZIP
     
+    /*
+     * 浏览器缓存时间
+     * 0: 没有缓存
+     */
     cacheControl : 7 * 24 * 3600            //浏览器缓存时间（秒）
-//    cacheControl : 0            //浏览器缓存时间（秒）
     
 };
