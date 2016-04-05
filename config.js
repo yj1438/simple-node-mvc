@@ -1,8 +1,16 @@
 /*
 * 项目配置文件
 */
+'use strict';
+const fs = require('fs');
 
 module.exports = {
+    
+    certificate: {
+        key: fs.readFileSync('./SSL/3_www.h2statistics.ml.key'),
+        cert: fs.readFileSync('./SSL/2_www.h2statistics.ml.crt'),
+        ca: fs.readFileSync('./SSL/1_root_bundle.crt')
+    },
     
     host: '0.0.0.0',
     

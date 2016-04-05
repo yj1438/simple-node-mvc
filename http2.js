@@ -5,11 +5,7 @@ var http2 = require('http2'),
 var config = require('./config'),
     server = require('./server');
 
-var options = {
-    key: fs.readFileSync('./SSL/3_www.h2statistics.ml.key'),
-    cert: fs.readFileSync('./SSL/2_www.h2statistics.ml.crt'),
-    ca: fs.readFileSync('./SSL/1_root_bundle.crt')
-};
+var options = config.certificate;
 
 var app = http2.createServer(options, function (req, res) {
     var _postData = '';
