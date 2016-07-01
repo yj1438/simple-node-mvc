@@ -46,5 +46,12 @@ module.exports = [
         url: /^\/ua\/sortid/i,
         controller: 'uastatistics',
         action: 'sortId'
+    },
+    //iscroll
+    {
+        method: 'get',
+        url: /^\/iscroll\/index/i,
+        controller: 'iscroll',
+        action: 'index'
     }
 ];

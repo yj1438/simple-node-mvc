@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>IScroll DEMO</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /><!-- 默认使用最新浏览器 -->
+        <meta http-equiv="Cache-Control" content="no-siteapp" /><!-- 不被网页(加速)转码 -->
+        <meta name="robots" content="index,follow"/> <!-- 搜索引擎抓取 -->
+        <meta name="renderer" content="webkit" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui" />
+        <meta name="apple-mobile-web-app-capable" content="yes" /><!-- 删除苹果默认的工具栏和菜单栏 -->
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" /><!-- 设置苹果工具栏颜色 -->
+        <meta name="apple-mobile-web-app-title" content="数胎动" /><!-- 添加到主屏后的标题（iOS 6 新增） -->
+        <meta name="apple-touch-fullscreen" content="yes" />
+        <meta name="apple-itunes-app" content="app-id=myAppStoreID, affiliate-data=myAffiliateData, app-argument=myURL">
+
+        <meta name="msapplication-TileColor" content="#000"/> <!-- Windows 8 磁贴颜色 -->
+        <meta name="msapplication-TileImage" content="icon.png"/> <!-- Windows 8 磁贴图标 -->
+
+        <meta name="screen-orientation" content="portrait" /><!-- uc强制竖屏 -->
+        <meta name="full-screen" content="yes" /><!-- UC强制全屏 -->
+        <meta name="browsermode" content="application" /><!-- UC应用模式 -->
+        <meta name="x5-orientation" content="portrait" /><!-- QQ强制竖屏 -->
+        <meta name="x5-fullscreen" content="true" /><!-- QQ强制全屏 -->
+        <meta name="x5-page-mode" content="app" /><!-- QQ应用模式 -->
+        <style>
+            #header {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 44px;
+                line-height: 44px;
+                background-color: #096;
+            }
+            #iscroll {
+                position: absolute;
+                top: 44px;
+                bottom: 40px;
+                width: 100%;
+                left: 0;
+                overflow: hidden;
+            }
+            #iscroll ul {
+                margin: 0;
+                padding: 0;
+            }
+            #footer {
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                height: 40px;
+                line-height: 40px;
+                color: #082;
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="header">iScroll</div>
+        
+        <div id="iscroll" class="">
+            <ul id="list">
+                <li></li>
+            </ul>
+        </div>
+        
+        <div id="footer">iScroll footer</div>
+        
+        <script type="text/javascript" src="/lib/iscroll/iscroll.js"></script>
+        <script>
+            var _html = '',
+                i = 0;
+            while (i < 50) {
+                _html += '<li>this is item ' + i + '</li>';
+                i++;
+            }
+            document.getElementById('list').innerHTML = _html;
+            
+            //
+            var myIscroll = new IScroll('#iscroll', {
+                
+            });
+            
+            myIscroll.on('scrollStart', function (evt) {
+                console.log(evt); 
+            });
+            myIscroll.on('scrollEnd', function (evt) {
+                console.log(evt); 
+            });
+            myIscroll.on('flick', function (evt) {
+                console.log(this.distX);
+                if (Math.abs(this.distX) - Math.abs(this.distY) > 20) {
+                    alert(this.distX > 0 ? 'right swiper' : 'left swiper');
+                }
+            });
+            
+            document.addEventListener('touchmove', function (evt) {
+                evt.preventDefault();
+            }, false)
+            
+        </script>
+    </body>
+</html>

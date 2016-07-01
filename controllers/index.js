@@ -84,10 +84,7 @@ exports.index = function () {
     //this.renderJson(this.params);
     let self_req = this.req,
         data = {},
-        userAgent = this.req.headers['user-agent'],
-        //API KEY ea731ec4
-        //UA_PARSE_URL = 'http://useragentapi.com/api/v3/json/ea731ec4/' + encodeURIComponent(userAgent);
-        UA_PARSE_URL = 'http://www.useragentstring.com/?uas=' + encodeURIComponent(userAgent) + '&getJSON=all';
+        userAgent = this.req.headers['user-agent'];
     
     //制作 HASHID
     let hashId;

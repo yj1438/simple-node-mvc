@@ -7,6 +7,10 @@ const rl = readline.createInterface({
     input: fs.createReadStream('data/ua_data.json')
 });
 
+/**
+ * 将原来保存在文件中的数据读到数据库中
+ *
+ */
 rl.on('line', (line) => {
     let uaData,
         saveData;
