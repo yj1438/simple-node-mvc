@@ -53,5 +53,13 @@ module.exports = [
         url: /^\/iscroll\/index/i,
         controller: 'iscroll',
         action: 'index'
+    },
+    //wechart
+    {
+        method: 'get',
+        url: /^\/wechat\/get_js_api_sign/i,
+        controller: 'wechat',
+        action: 'get_js_api_sign'
     }
+
 ];
