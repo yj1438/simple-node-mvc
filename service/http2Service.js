@@ -38,5 +38,6 @@ exports.findPage = function(page, callback) {
 //点击率加1
 exports.addCTR = function(hashid, CTR, callback) {
     let _crt = parseInt(CTR, 10) || 1;
-    Database.handle('UPDATE statistics s SET s.ctr=s.ctr+' + _crt + ' WHERE s.hash_id = ?', hashid, callback || () => {});
+    let _callback = callback || function () {};
+    Database.handle('UPDATE statistics s SET s.ctr=s.ctr+' + _crt + ' WHERE s.hash_id = ?', hashid, _callback);
 }

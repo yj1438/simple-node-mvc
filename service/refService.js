@@ -24,7 +24,8 @@ exports.addCTR = function(data, callback) {
     }
     let sql = "INSERT INTO stat_ref(id, ref, " + protocol + ") values ('" + id + "', '" + ref + "', 1)"
          + " ON DUPLICATE KEY UPDATE " + protocol + " = " + protocol + " + 1;";
-    Database.handle(sql, {}, callback || () => {});
+    let _callback = callback || function () {};
+    Database.handle(sql, {}, _callback);
 }
 
 

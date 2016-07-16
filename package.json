@@ -6,12 +6,12 @@
   "dependencies": {
     "art-template": "^3.0.3",
     "http2": "^3.3.2",
-    "jquery": "^2.2.0",
+    "jquery": "^2.2.4",
     "merge": "^1.2.0",
     "mysql": "github:felixge/node-mysql",
-    "request": "^2.69.0",
-    "spdy": "^3.2.3",
-    "string-to-stream": "^1.0.1"
+    "request": "^2.72.0",
+    "spdy": "^3.3.3",
+    "string-to-stream": "^1.1.0"
   },
   "devDependencies": {
     "babel-core": "^6.4.5",
