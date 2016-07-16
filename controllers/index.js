@@ -172,7 +172,7 @@ exports.index = function () {
         }
     }
     
-    data.title = "Welcome to HTTP/2 statistics";
+    data.title = "";
     data.userAgent = userAgent;
     data.isSpdy = '当前客户端' + (this.req.isSpdy ? '支持' : '不支持') + ' SPDY/H2 !!!';
     data.protocol = protocolMap[this.req.spdyVersion];

@@ -60,6 +60,13 @@ module.exports = [
         url: /^\/wechat\/get_js_api_sign/i,
         controller: 'wechat',
         action: 'get_js_api_sign'
+    },
+    //JWPLAYER
+    {
+        method: 'get',
+        url: /^\/jwplayer\/index/i,
+        controller: 'jwplayer',
+        action: 'index'
     }
 
 ];

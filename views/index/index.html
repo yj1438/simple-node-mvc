@@ -6,8 +6,9 @@
     <meta http-equiv="Cache-Control" content="no-siteapp" /><!-- 不被网页(加速)转码 -->
     <meta name="renderer" content="webkit" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui" />
-    <title>Welcome to HTTP/2 statistics</title>
-<!--    <link rel="stylesheet" type="text/css" href="/module/ua.css" />-->
+    <title>HTTP/2 Terminal Detection</title>
+    <meta name="keywords" content="http2,spdy,http protocol,http2 协议,http 检测,useragent"/>
+    <meta name="description" content="检测终端设备是否支持HTTP2协议，SPDY协议检测，查看UserAgent"
     <style>
         body {
             font-family: "Helvetica Neue", "Microsoft YaHei", Helvetica, Arial, sans-serif;
@@ -32,8 +33,11 @@
 </head>
 <body>
 <h1>
-    {{title}}
+    Welcome to HTTP2/SPDY Terminal Detection{{title}}
 </h1>
+<h2>
+    {{title}}
+</h2>
     
     <section id="main_page">
         <p>{{userAgent}}</p>
