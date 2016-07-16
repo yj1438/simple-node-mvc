@@ -46,5 +46,27 @@ module.exports = [
         url: /^\/ua\/sortid/i,
         controller: 'uastatistics',
         action: 'sortId'
+    },
+    //iscroll
+    {
+        method: 'get',
+        url: /^\/iscroll\/index/i,
+        controller: 'iscroll',
+        action: 'index'
+    },
+    //wechart
+    {
+        method: 'get',
+        url: /^\/wechat\/get_js_api_sign/i,
+        controller: 'wechat',
+        action: 'get_js_api_sign'
+    },
+    //JWPLAYER
+    {
+        method: 'get',
+        url: /^\/jwplayer\/index/i,
+        controller: 'jwplayer',
+        action: 'index'
     }
+
 ];

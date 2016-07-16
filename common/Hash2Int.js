@@ -9,7 +9,7 @@
 /*
  * 加法 HASH
  */
-exports.additiveHash(string, range) {
+exports.additiveHash = function(string, range) {
     let hash,
         i;
     for (hash = string.length, i = 0; i < string.length; i++) {
@@ -21,7 +21,7 @@ exports.additiveHash(string, range) {
 /*
  * 位运算 HASH
  */
-exports.rotatingHash(string, range) {
+exports.rotatingHash = function(string, range) {
     let hash,
         i;
     for (hash = string.length, i = 0; i < string.length; i++) {
@@ -36,9 +36,9 @@ exports.rotatingHash(string, range) {
  * 推荐乘数可以是31.131.13131.13131...
  * 
  */
-exports.bernsteinHash(string, range) {
+exports.bernsteinHash = function(string, range) {
     let hash = 0,
-        int i;
+        i;
     for (i = 0; i < string.length; i++)
         hash = 31 * hash + string.charCodeAt(i);
     return range ? (hash % range) : hash;
@@ -47,7 +47,7 @@ exports.bernsteinHash(string, range) {
 /*
  * 改进后的 FNVHash
  */
-exports.FNVHash(string, range) {
+exports.FNVHash = function(string, range) {
     let p = 16777619,
         hash = 2166136261;
     for (let i = 0; i < string.length; i++)
