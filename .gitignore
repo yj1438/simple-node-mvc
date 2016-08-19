@@ -4,3 +4,5 @@
 nohup.out
 error.log
 out.log
+baidu_verify_*.html
+google*.html
