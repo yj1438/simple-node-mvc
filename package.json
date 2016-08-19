@@ -11,8 +11,8 @@
     "jssha": "^1.6.2",
     "merge": "^1.2.0",
     "mysql": "github:felixge/node-mysql",
-    "request": "^2.72.0",
-    "spdy": "^3.3.3",
+    "request": "^2.74.0",
+    "spdy": "^3.4.0",
     "string-to-stream": "^1.1.0"
   }
 }
