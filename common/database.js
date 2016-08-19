@@ -4,7 +4,7 @@ const Mysql = require('mysql');
 const dbInfo = {
     host: 'localhost',
     user: 'root',
-    password: '******',
+    password: 'Yj@88.0101',
     database: 'http2',
     multipleStatements: true,
     acquireTimeout: 3000,
