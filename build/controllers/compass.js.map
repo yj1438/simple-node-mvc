@@ -1,1 +1,0 @@
-{"version":3,"sources":["controllers/compass.js"],"names":[],"mappings":"AAAA;;;AAGA;;AAEA,QAAQ,KAAR,GAAgB,YAAY;AACxB,OAAK,MAAL,CAAY,eAAZ,EAA6B,EAA7B;AACH,CAFD","file":"controllers/compass.js","sourcesContent":["/**\n * 指南针\n */\n'use strict';\n\nexports.index = function () {\n    this.render('compass/index', {});\n};"],"sourceRoot":"/source/"}
