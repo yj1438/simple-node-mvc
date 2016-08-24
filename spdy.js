@@ -8,7 +8,8 @@ var config = require('./config'),
 var options = config.certificate;
 
 var app = spdy.createServer(options, function (req, res) {
-    //
+    //处理一般的 POST 数据 
+    // 如果是 form-data 形的数据，用 multiparty 处理
     var _postData = '';
     req.on('data', function (chunk) {
         _postData += chunk;

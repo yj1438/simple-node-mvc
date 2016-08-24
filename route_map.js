@@ -60,6 +60,13 @@ module.exports = [
         url: /^\/wechat\/get_js_api_sign/i,
         controller: 'wechat',
         action: 'get_js_api_sign'
+    },
+    //指南针
+    {
+        method: 'get',
+        url: /^\/compass(\/index)*/i,
+        controller: 'compass',
+        action: 'index'
     }
 
 ];

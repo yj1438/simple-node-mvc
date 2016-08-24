@@ -1,6 +1,6 @@
 exports.index = function () {
     this.render('/http2/index', {});
-}
+};
 
 exports.demo = function (args) {
     var sequence = [],
@@ -9,8 +9,8 @@ exports.demo = function (args) {
         sequence.push({img: 'photo_' + (i + 1000 + '').slice(1) + '.png'});
     }
     this.render('http2/http-demo', {sequence: sequence, start_time: this.params.start_time});  
-}
+};
 
 exports.static = function (args) {
     this.render('/http2/static', {});
-}
+};
