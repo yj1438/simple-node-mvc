@@ -15,7 +15,7 @@ module.exports = {
     output: responseUtil.out,
     
     render: function (viewName, data) {
-        let viewfile = path.join(basePath, 'views', viewName),
+        let viewfile = path.join(basePath, 'server/views', viewName),
             output,
             strStream;
         try {

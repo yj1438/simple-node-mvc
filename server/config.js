@@ -7,9 +7,9 @@ const fs = require('fs');
 module.exports = {
     
     certificate: {
-        key: fs.readFileSync('./SSL/3_www.h2statistics.ml.key'),
-        cert: fs.readFileSync('./SSL/2_www.h2statistics.ml.crt'),
-        ca: fs.readFileSync('./SSL/1_root_bundle.crt')
+        key: fs.readFileSync('server/SSL/3_www.h2statistics.ml.key'),
+        cert: fs.readFileSync('server/SSL/2_www.h2statistics.ml.crt'),
+        ca: fs.readFileSync('server/SSL/1_root_bundle.crt')
     },
     
     host: '0.0.0.0',
@@ -18,7 +18,7 @@ module.exports = {
 
     port_ssl : '443',
     
-    staticFileDir : 'static',               //静态文件文件夹
+    staticFileDir : '../static',               //静态文件文件夹
                 
     gzip : true,                            //是否开启 GZIP
     

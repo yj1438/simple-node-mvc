@@ -1,16 +1,16 @@
-'use strict';
-var spdy = require('spdy'),
-    fs = require('fs');
 
-var config = require('./config'),
+'use strict';
+
+var https = require('https'),
+    fs = require('fs'),
+    config = require('./config'),
     server = require('./server');
 
 var options = config.certificate;
 
-var app = spdy.createServer(options, function (req, res) {
-    //处理一般的 POST 数据 
-    // 如果是 form-data 形的数据，用 multiparty 处理
+var app = https.createServer(options, function (req, res) {
     var _postData = '';
+    //on用于添加一个监听函数到一个特定的事件
     req.on('data', function (chunk) {
         _postData += chunk;
     }).on('end', function () {
@@ -18,11 +18,7 @@ var app = spdy.createServer(options, function (req, res) {
         server.handlerRequest(req, res);
     });
 }).listen(config.port_ssl, config.host, function () {
-    console.log('SPDY Server running at https://' + config.host + ':' + config.port_ssl + '/');
-});
-
-app.on('error', function (err) {
-    this.emit("err");
+    console.log('http/1.1 Server running at https://' + config.host + ':' + config.port_ssl + '/');
 });
 
 /*
@@ -33,6 +29,4 @@ http.createServer(function (req, res) {
     res.writeHead(301, { "Location": "https://" + req.headers.host + req.url });
     res.end();
 }).listen(config.port_normal, config.host);
-
-
-
+//# sourceMappingURL=http1.js.map
