@@ -1,8 +1,8 @@
 'use strict';
 
 const getTicket = require('./../common/wechat/getTicket'),
-      getSign = require('./../common/wechat/getSign'),
-      APP_KEY = require('./../common/wechat/AppKey'); 
+    getSign = require('./../common/wechat/getSign'),
+    APP_KEY = require('./../common/wechat/AppKey'); 
 
 
 /**

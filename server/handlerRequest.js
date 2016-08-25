@@ -14,7 +14,7 @@ import StaticContent from './lib/StaticContent';
 /**
  * 所有请求的统一入口
  */
-export function handlerRequest(req, res) {
+export default (req, res) => {
     const actionInfo = route.getActionInfo(req.url, req.method);
     if (actionInfo.action) {
         const controller = require('./controllers/' + actionInfo.controller);
