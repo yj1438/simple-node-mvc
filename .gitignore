@@ -1,9 +1,14 @@
 /node_modules/*
 /build
+
 !.keep
+
+#
 .DS_Store
 nohup.out
 error.log
 out.log
+
+#
 baidu_verify_*.html
 google*.html
