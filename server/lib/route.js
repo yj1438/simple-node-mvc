@@ -1,11 +1,8 @@
-/**
- * @author qleelulu
- * @blog http://qleelulu.cnblogs.com
- */
+
 'use strict';
 
-const url_parse = require('url').parse,
-    route_map = require('../route_map');
+import { parse } from 'url';
+import route_map from '../route_map';
 
 //根据http请求的method来分别保存route规则
 let routes = {
@@ -16,55 +13,49 @@ let routes = {
     delete: []
 };
 
-/**
- * 注册route规则
- * 示例：
- * route.map({
- *     method:'post',
- *     url: /\/blog\/post\/(\d+)\/?$/i,
- *     controller: 'blog',
- *     action: 'showBlogPost'
- * })
- */
-function constructMap(map) {
-    let routeItem;
-    for (let i = 0; i < map.length; i = i + 1) {
-        routeItem = map[i];
+function _constructMap(map) {
+    if (Object.prototype.toString.call(map) !== '[object Array]') {
+        return;
+    }
+    for (const routeItem of map) {
         if (routeItem && routeItem.url && routeItem.controller) {
             const method = routeItem.method ? routeItem.method.toLowerCase() : 'get';
             routes[method].push({
                 url: routeItem.url, //url匹配正则
                 controller: routeItem.controller,
-                action: routeItem.action || 'index'
+                action: routeItem.action || 'index'             //默认index
             });
         }
     }
 }
-//加载路由
-constructMap(route_map);
 
-exports.getActionInfo = function (url, method) {
-    // url: /blog/index?page=1 ,则pathname为: /blog/index
-    method = method ? method.toLowerCase() : 'get';
-    const pathname = url_parse(url).pathname,
-        m_routes = routes[method];
-    let route = {
+_constructMap(route_map);
+
+class Route {
+
+    static getActionInfo(url, method) {
+        // url: /blog/index?page=1 ,则pathname为: /blog/index
+        method = method ? method.toLowerCase() : 'get';
+        const pathname = parse(url).pathname,
+            m_routes = routes[method];
+        let route = {
             controller: null,
             action: null,
             args: null
         };
-    for (let k in m_routes) {
-        if (m_routes.hasOwnProperty(k)) {
+        for (const _route of m_routes) {
             //正则匹配
-            route.args = m_routes[k].url.exec(pathname);
+            route.args = _route.url.exec(pathname);
             if (route.args) {
-                route.controller = m_routes[k].controller;
-                route.action = m_routes[k].action;
+                route.controller = _route.controller;
+                route.action = _route.action;
                 route.args.shift(); //第一个值为匹配到的整个url，去掉
                 break;
             }            
         }
+        //如果匹配到route，r大概是 {controller:'blog', action:'index', args:['1']}
+        return route;
     }
-    //如果匹配到route，r大概是 {controller:'blog', action:'index', args:['1']}
-    return route;
-};
+}
+
+export default Route;

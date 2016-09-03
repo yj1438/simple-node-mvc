@@ -18,7 +18,7 @@ module.exports = {
 
     port_ssl : '443',
     
-    staticFileDir : '../static',               //静态文件文件夹
+    staticFileDir : 'static',               //静态文件文件夹，相对根目录
                 
     gzip : true,                            //是否开启 GZIP
     

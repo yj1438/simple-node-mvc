@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = {
+export default {
     "aiff": "audio/x-aiff",
     "arj": "application/x-arj-compressed",
     "asf": "video/x-ms-asf",

@@ -7,15 +7,14 @@ import path from 'path';
 import template from 'art-template';
 import str2steam from 'string-to-stream';
 
-import responseUtil from './responseUtil';
-import { handler500 } from './httpError';
+import HttpBaes from './HttpBase';
 
 const basePath = process.cwd();
 
-class ViewEngine {
+class ViewEngine extends HttpBaes{
 
     constructor(req, res) {
-        this.output = responseUtil.out;
+        super(req, res);
     }
 
     render(viewName, data) {
@@ -25,9 +24,9 @@ class ViewEngine {
         try {
             output = template(viewfile, data);
             strStream = str2steam(output);
-            this.output(strStream, 'html', {});
+            this.out(strStream, 'html');
         } catch (err) {
-            handler500(this.req, this.res, err.toString());
+            this._500(err.toString());
             return;
         }
     }
@@ -40,38 +39,8 @@ class ViewEngine {
         } else {
             strStream = str2steam(JSON.stringify(data));
         }
-        this.output(strStream, 'json', {});
+        this.out(strStream, 'json');
     }
 }
 
 export default ViewEngine;
-
-// export default {
-
-//     output: responseUtil.out,
-    
-//     render: function (viewName, data) {
-//         let viewfile = path.join(basePath, 'server/views', viewName),
-//             output,
-//             strStream;
-//         try {
-//             output = template(viewfile, data);
-//             strStream = str2steam(output);
-//             this.output(strStream, 'html', {});
-//         } catch (err) {
-//             handler500(this.req, this.res, err.toString());
-//             return;
-//         }
-//     },
-//     renderJson: function (data) {
-//         const callbackFnName = this.params.callback;
-//         let strStream;
-//         if (callbackFnName) {
-//             strStream = str2steam(callbackFnName + '(' + JSON.stringify(data) + ')');
-//         } else {
-//             strStream = str2steam(JSON.stringify(data));
-//         }
-//         this.output(strStream, 'json', {});
-        
-//     }
-// };
