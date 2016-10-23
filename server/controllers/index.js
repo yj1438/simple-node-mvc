@@ -1,20 +1,12 @@
 'use strict';
 
 import request from 'request';
-import fs from 'fs';
 import crypto from 'crypto';
 
-// const request = require('request'),
-//       fs = require('fs'),
-//       crypto = require('crypto'),
-//       CtrCache = require('../common/CtrCache');
 import BaseController from '../lib/BaseController';
 import http2Service from '../service/http2Service';
 import refService from '../service/refService';
 import CtrCache from '../common/CtrCache';
-
-// const http2Service = require('../service/http2Service'),
-//       refService = require('../service/refService');
 
 const protocolMap = {
     '1': 'http 1.x',
@@ -97,8 +89,7 @@ class Index extends BaseController{
     index() {
 
         //this.renderJson(this.params);
-        let self_req = this.req,
-            data = {},
+        let data = {},
             userAgent = this.req.headers['user-agent'];
 
         //制作 HASHID

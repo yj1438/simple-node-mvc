@@ -20,7 +20,6 @@ spdy.createServer(config.certificate, (req, res) => {
     console.log('SPDY Server running at https://' + config.host + ':' + config.port_ssl + '/');
 }).on('error', function (err) {
     this.emit(err);
-    
 });
 
 /*

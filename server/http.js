@@ -1,20 +1,24 @@
 'use strict';
-var http = require('http'),
-    fs = require('fs'),
-    config = require('./config'),
-    server = require('./server');
+
+import http from 'http';
+//
+import config from './config';
+import handlerRequest from './handlerRequest';
 
 /*
  * http 方式的 redirect
  */
-var http = require('http');
 http.createServer(function (req, res) {
-    var _postData = '';
+    let _postData = '';
     //on用于添加一个监听函数到一个特定的事件
     req.on('data', function (chunk) {
         _postData += chunk;
     }).on('end', function () {
         req.post = _postData;
-        server.handlerRequest(req, res);
+        handlerRequest(req, res);
     });
-}).listen(config.port_normal, config.host);
+}).listen(config.port_ssl, config.host, () => {
+    console.log('SPDY Server running at http://' + config.host + ':' + 80 + '/');
+}).on('error', function (err) {
+    this.emit(err);
+});

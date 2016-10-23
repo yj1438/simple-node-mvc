@@ -2,9 +2,10 @@
 * 项目配置文件
 */
 'use strict';
-const fs = require('fs');
 
-module.exports = {
+import fs from 'fs';
+
+export default {
     
     certificate: {
         key: fs.readFileSync('server/SSL/3_www.h2statistics.ml.key'),
