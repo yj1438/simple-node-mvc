@@ -1,16 +1,31 @@
-exports.index = function () {
-    this.render('/http2/index', {});
-};
 
-exports.demo = function (args) {
-    var sequence = [],
-        i;
-    for (i = 1; i <= 400; i++) {
-        sequence.push({img: 'photo_' + (i + 1000 + '').slice(1) + '.png'});
+'use strict';
+
+import BaseController from '../lib/BaseController';
+
+class Http2 extends BaseController {
+
+    constructor(req, res) {
+        super(req, res);
     }
-    this.render('http2/http-demo', {sequence: sequence, start_time: this.params.start_time});  
-};
 
-exports.static = function (args) {
-    this.render('/http2/static', {});
-};
+    index() {
+        this.render('/http2/index', {});
+    }
+
+    demo() {
+        let sequence = [],
+            i;
+        for (i = 1; i <= 400; i++) {
+            sequence.push({img: 'photo_' + (i + 1000 + '').slice(1) + '.png'});
+        }
+        this.render('http2/http-demo', {sequence: sequence, start_time: this.params.start_time});
+    }
+
+    static() {
+        this.render('/http2/static', {});
+    }
+
+}
+
+export default Http2;

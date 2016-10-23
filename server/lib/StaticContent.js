@@ -3,7 +3,6 @@
 import url from 'url';
 import path from 'path';
 import fs from 'fs';
-import zlib from 'zlib';
 
 import config from '../config';
 import HttpBase from './HttpBase';

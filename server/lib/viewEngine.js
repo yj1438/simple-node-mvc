@@ -7,11 +7,11 @@ import path from 'path';
 import template from 'art-template';
 import str2steam from 'string-to-stream';
 
-import HttpBaes from './HttpBase';
+import HttpBase from './HttpBase';
 
 const basePath = process.cwd();
 
-class ViewEngine extends HttpBaes{
+class ViewEngine extends HttpBase{
 
     constructor(req, res) {
         super(req, res);

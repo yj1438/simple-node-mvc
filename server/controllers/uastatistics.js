@@ -83,7 +83,7 @@ class Uastatistics extends BaseController {
                             num: value.num
                         });
                     }
-                    resultData.map((value, index) => {
+                    resultData.map((value) => {
                         value.y = (value.num / total).toFixed(4) * 100;
                         return value;
                     });
@@ -110,7 +110,7 @@ class Uastatistics extends BaseController {
                                 num: _data[p]
                             });
                         }
-                        resultData.map((value, index) => {
+                        resultData.map((value) => {
                             value.y = (value.num / total).toFixed(4) * 100;
                             return value;
                         });

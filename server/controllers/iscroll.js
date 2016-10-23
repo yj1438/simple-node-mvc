@@ -4,7 +4,18 @@
 
 'use strict';
 
-exports.index = function () {
-    let viewData = {};   
-    this.render('iscroll/main', viewData);
-};
+import BaseController from '../lib/BaseController';
+
+class Iscroll extends BaseController {
+
+    constructor(req, res) {
+        super(req, res);
+    }
+
+    index() {
+        this.render('iscroll/main', {})
+    }
+
+}
+
+export default Iscroll;

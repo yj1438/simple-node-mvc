@@ -3,6 +3,17 @@
  */
 'use strict';
 
-exports.index = function () {
-    this.render('compass/index', {});
-};
+import BaseController from '../lib/BaseController';
+
+class Compass extends BaseController {
+    
+    constructor(req, res) {
+        super(req, res);
+    }
+
+    index() {
+        this.render('compass/index', {});
+    }
+}
+
+export default Compass;

@@ -1,7 +1,5 @@
 'use strict';
 
-import fs from 'fs';
-import path from 'path';
 import zlib from 'zlib';
 
 import contentTypes from './contentTypes';
@@ -23,6 +21,7 @@ class HttpBase {
         this.res = res;
     }
 
+    
     _404() {
         HttpError.handler404(this.req, this.res);
     }
