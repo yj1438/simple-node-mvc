@@ -5,14 +5,14 @@
   "private": "true",
   "dependencies": {
     "art-template": "^3.0.3",
-    "http2": "^3.3.4",
+    "http2": "^3.3.6",
     "iscroll": "^5.2.0",
     "jquery": "^2.2.4",
     "jssha": "^1.6.2",
     "merge": "^1.2.0",
     "mysql": "github:felixge/node-mysql",
-    "request": "^2.74.0",
-    "spdy": "^3.4.0",
+    "request": "^2.75.0",
+    "spdy": "^3.4.4",
     "string-to-stream": "^1.1.0"
   }
 }
