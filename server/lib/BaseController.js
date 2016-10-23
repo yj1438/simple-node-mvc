@@ -19,7 +19,7 @@ class BaseController extends ViewEngine{
         const urlObj = parse(req.url);
         const paramObj = querystring.parse(urlObj.query);
         try {
-            postObj = req.post ? querystring.parse(req.post) : {};       //url 参数
+            const postObj = req.post ? querystring.parse(req.post) : {};       //url 参数
             Object.assign(queryObj, paramObj, postObj);
         } catch (err) {
             console.log(err);
