@@ -24,11 +24,11 @@ class HttpBase {
     }
 
     _404() {
-        HttpError.handler404(this.req, this,res);
+        HttpError.handler404(this.req, this.res);
     }
 
     _500() {
-        HttpError.handler500(this.req, this,res);
+        HttpError.handler500(this.req, this.res);
     }
 
     /**

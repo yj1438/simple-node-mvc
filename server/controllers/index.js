@@ -136,7 +136,7 @@ class Index extends BaseController{
                         * 此时还没有入表，所以会造成重复 hash_id 入表的情况
                         * 所以有了uaDataStore
                         */
-                        makeUaData(userAgent, uaData => {
+                        this.makeUaData(userAgent, uaData => {
                             if (!uaData) {
                                 uaDataStore.remove(hashId);
                                 return;

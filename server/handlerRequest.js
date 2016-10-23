@@ -21,12 +21,13 @@ export default (req, res) => {
         const Controller = require('./controllers/' + actionInfo.controller);
         console.log(Controller);
         try {
-
-
+            /**
+             * 這個地方有點糾結，也是整個ES6換的最LOW的地方
+             * babel 構建後 require 的是已經改變過後的 class
+             * 所以這個地方需要 new Controller.default 而不是正常的 new Controller
+             */
             const controllerContext = new Controller.default(req, res);
             controllerContext[actionInfo.action]();
-            // const controllerContext = new BaseController(req, res);
-            // controller[actionInfo.action].call(controllerContext);
         } catch (err) {
             console.log(err);
             httpError.handler500(req, res, 'ERROR: controller "' + actionInfo.controller + '" without action "' + actionInfo.action + '"');

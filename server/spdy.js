@@ -1,7 +1,6 @@
 'use strict';
 import spdy from 'spdy';
 import http from 'http';
-import fs from 'fs';
 
 //
 import config from './config';
@@ -20,7 +19,8 @@ spdy.createServer(config.certificate, (req, res) => {
 }).listen(config.port_ssl, config.host, () => {
     console.log('SPDY Server running at https://' + config.host + ':' + config.port_ssl + '/');
 }).on('error', function (err) {
-    this.emit("err");
+    this.emit(err);
+    
 });
 
 /*
