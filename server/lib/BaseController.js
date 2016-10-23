@@ -5,7 +5,6 @@
  */
 'use strict';
 
-import path from 'path';
 import { parse } from 'url';
 import querystring from 'querystring';
 
@@ -17,11 +16,11 @@ class BaseController extends ViewEngine{
         super(req, res);
         //处理参数
         let queryObj = {};
+        const urlObj = parse(req.url);
+        const paramObj = querystring.parse(urlObj.query);
         try {
-            const urlObj = parse(req.url);
-            const paramObj = querystring.parse(urlObj.query),
-                postObj = req.post ? querystring.parse(req.post) : {};       //url 参数
-            Object.assign(queryObj, urlObj, postObj);
+            postObj = req.post ? querystring.parse(req.post) : {};       //url 参数
+            Object.assign(queryObj, paramObj, postObj);
         } catch (err) {
             console.log(err);
             queryObj = paramObj;
