@@ -4,8 +4,8 @@ import request from 'request';
 import crypto from 'crypto';
 
 import BaseController from '../lib/BaseController';
-import http2Service from '../service/http2Service';
-import refService from '../service/refService';
+import Http2Service from '../service/http2Service';
+import RefService from '../service/refService';
 import CtrCache from '../common/CtrCache';
 
 const protocolMap = {
@@ -22,6 +22,8 @@ class Index extends BaseController{
 
     constructor(req, res) {
         super(req, res);
+        this.http2Service = new Http2Service();
+        this.refService = new RefService();
     }
 
     /*
@@ -115,7 +117,7 @@ class Index extends BaseController{
             //console.log('正在处理' + hashId + '...');
         } else {
             uaDataStore.add(hashId);
-            http2Service.findByHashid(hashId, (err, rows) => {
+            this.http2Service.findByHashid(hashId, (err, rows) => {
                 if (err) {
                     uaDataStore.remove(hashId);
                     console.log(err);
@@ -137,7 +139,7 @@ class Index extends BaseController{
                             uaData.is_spdy = this.req.isSpdy ? 1 : 0;
                             uaData.protocol = protocolMap[this.req.spdyVersion];
                             uaData.ctr = uaDataStore.getCTR(hashId);
-                            http2Service.add(uaData, (err, result) => {
+                            this.http2Service.add(uaData, (err, result) => {
                                 if (err) {
                                     console.log(err);
                                 } else {
@@ -147,7 +149,7 @@ class Index extends BaseController{
                             });
                         });
                     } else {
-                        http2Service.addCTR(hashId, uaDataStore.getCTR(hashId));
+                        this.http2Service.addCTR(hashId, uaDataStore.getCTR(hashId));
                         uaDataStore.remove(hashId);
                         //是否将已有的这个记录加点击
                     }
@@ -175,7 +177,7 @@ class Index extends BaseController{
                 refData.id = refId;
                 refData.ref = ref;
                 refData.protocol = this.req.spdyVersion;
-                refService.addCTR(refData);
+                this.refService.addCTR(refData);
             }
         }
 

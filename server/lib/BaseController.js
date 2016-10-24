@@ -8,7 +8,7 @@
 import { parse } from 'url';
 import querystring from 'querystring';
 
-import ViewEngine from './ViewEngine';
+import ViewEngine from './viewEngine';
 
 class BaseController extends ViewEngine{
 

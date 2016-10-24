@@ -9,6 +9,7 @@ import str2steam from 'string-to-stream';
 
 import HttpBase from './HttpBase';
 
+// 执行环境根目录
 const basePath = process.cwd();
 
 class ViewEngine extends HttpBase{

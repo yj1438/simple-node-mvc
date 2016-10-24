@@ -2,8 +2,8 @@
 
 import BaseController from '../lib/BaseController';
 
-import http2Service from '../service/http2Service';
-import refService from '../service/refService';
+import Http2Service from '../service/http2Service';
+import RefService from '../service/refService';
 
 
 // exports.sortId = function () {
@@ -13,6 +13,8 @@ class Uastatistics extends BaseController {
 
     constructor(req, res) {
         super(req, res);
+        this.http2Service = new Http2Service();
+        this.refService = new RefService();
     }
 
     /**
@@ -29,7 +31,7 @@ class Uastatistics extends BaseController {
             nowPage: _params.nowPage,
             pageSize: _params.pageSize
         };
-        http2Service.findPage(page, (err, rows) => {
+        this.http2Service.findPage(page, (err, rows) => {
             if (err) {
                 console.log(err);
                 this.renderJson(Object.assign({}, _params, {isSuccess: false}));
@@ -48,7 +50,7 @@ class Uastatistics extends BaseController {
 
     //取列表 JSON 数据
     getalldata() {
-        http2Service.findAll((err, rows) => {
+        this.http2Service.findAll((err, rows) => {
             if (err) {
                 console.log(err);
                 this.renderJson([]);
@@ -70,7 +72,7 @@ class Uastatistics extends BaseController {
         let total = 0,
             resultData = [];
         if (!ref) {
-            http2Service.countProtocal((err, rows) => {
+            this.http2Service.countProtocal((err, rows) => {
                 if (err) {
                     console.error(err);
                     this.render('ua/charts', {data: null, total: 0});
@@ -91,7 +93,7 @@ class Uastatistics extends BaseController {
                 }
             });
         } else {
-            refService.findByRef(ref, (err, rows) => {
+            this.refService.findByRef(ref, (err, rows) => {
                 if (err) {
                     console.error(err);
                     this.render('ua/charts', {data: null, total: 0});

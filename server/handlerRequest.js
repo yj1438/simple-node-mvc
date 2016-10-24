@@ -19,7 +19,6 @@ export default (req, res) => {
     const actionInfo = route.getActionInfo(req.url, req.method);
     if (actionInfo.controller && actionInfo.action) {
         const Controller = require('./controllers/' + actionInfo.controller);
-        console.log(Controller);
         try {
             /**
              * 這個地方有點糾結，也是整個ES6換的最LOW的地方
