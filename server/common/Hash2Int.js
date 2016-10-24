@@ -34,7 +34,7 @@ class Hash2Init {
      * 
      * @memberOf Hash2Init
      */
-    rotatingHash(string, range) {
+    static rotatingHash(string, range) {
         let hash,
             i;
         for (hash = string.length, i = 0; i < string.length; i++) {
@@ -54,7 +54,7 @@ class Hash2Init {
      * 
      * @memberOf Hash2Init
      */
-    bernsteinHash(string, range) {
+    static bernsteinHash(string, range) {
         let hash = 0,
             i;
         for (i = 0; i < string.length; i++)
@@ -71,7 +71,7 @@ class Hash2Init {
      * 
      * @memberOf Hash2Init
      */
-    FNVHash(string, range) {
+    static FNVHash(string, range) {
         let p = 16777619,
             hash = 2166136261;
         for (let i = 0; i < string.length; i++)

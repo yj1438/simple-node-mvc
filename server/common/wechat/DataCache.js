@@ -1,6 +1,6 @@
 'use strict';
 
-let DataCache = {
+const DataCache = {
     token: '',
     token_expries: 0,
     ticket: '',
@@ -17,5 +17,4 @@ let DataCache = {
     }
 }
 
-
-module.exports = DataCache;
+export default DataCache;
