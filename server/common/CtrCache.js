@@ -8,7 +8,7 @@
 class CtrCache {
 
     constructor() {
-
+        this.tempHashIds = {};
     }
 
     add(hashId) {

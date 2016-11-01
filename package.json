@@ -12,18 +12,20 @@
     "merge": "^1.2.0",
     "mysql": "github:felixge/node-mysql",
     "request": "^2.74.0",
-    "spdy": "^3.4.0",
+    "spdy": "^3.4.4",
     "string-to-stream": "^1.1.0"
   },
   "devDependencies": {
+    "babel-core": "^6.17.0",
     "babel-eslint": "^6.1.2",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.16.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.18.0",
     "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-preset-latest": "^6.16.0",
     "babel-preset-stage-3": "^6.17.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-cached": "^1.1.0",
     "gulp-remember": "^0.3.1",
-    "gulp-sourcemaps": "^1.8.1"
+    "gulp-sourcemaps": "^2.2.0"
   }
 }

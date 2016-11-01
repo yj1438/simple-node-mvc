@@ -10,7 +10,13 @@ class Http2Service {
     }
 
     add(data, callback) {
-        Database.handle('INSERT INTO statistics SET ?', data, callback);
+        const result_promise = Database.handleSync('INSERT INTO statistics SET ?', data);
+        result_promise.then((result) => {
+            callback(null, result)
+        }).catch((err) => {
+            callback(err);
+        });
+        // Database.handle('INSERT INTO statistics SET ?', data, callback);
     }
 
     findByHashid(hashid, callback) {
@@ -40,7 +46,13 @@ class Http2Service {
     addCTR(hashid, CTR, callback) {
         let _crt = parseInt(CTR, 10) || 1;
         let _callback = callback || function () {};
-        Database.handle('UPDATE statistics s SET s.ctr=s.ctr+' + _crt + ' WHERE s.hash_id = ?', hashid, _callback);
+        const result_promise = Database.handleSync('UPDATE statistics s SET s.ctr=s.ctr+' + _crt + ' WHERE s.hash_id = ?', hashid);
+        result_promise.then((result) => {
+            _callback(null, result);
+        }).catch((err) => {
+            _callback(err);
+        })
+        // Database.handle('UPDATE statistics s SET s.ctr=s.ctr+' + _crt + ' WHERE s.hash_id = ?', hashid, _callback);
     }
 
 }
