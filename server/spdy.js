@@ -1,7 +1,8 @@
 'use strict';
 import spdy from 'spdy';
 import http from 'http';
-
+import multiparty from 'multiparty';
+import util from 'util';
 //
 import config from './config';
 import handlerRequest from './handlerRequest';
@@ -9,6 +10,19 @@ import handlerRequest from './handlerRequest';
 spdy.createServer(config.certificate, (req, res) => {
     //处理一般的 POST 数据 
     // 如果是 form-data 形的数据，用 multiparty 处理
+    if (req.method.toLowerCase() === 'post' && req.headers['content-type'] === 'multipart/form-data') {
+        const form = new multiparty.Form();
+        form.parse(req, (err, fields, files) => {
+            if (err) {
+                res.end(util.inspect(err));
+                return;
+            }
+            res.writeHead(200, {'content-type': 'text/plain'});
+            res.write('received upload:\n\n');
+            res.end(util.inspect({fields: fields, files: files}));
+        });
+        return;
+    }
     let _postData = '';
     req.on('data', (chunk) => {
         _postData += chunk;
