@@ -15,17 +15,24 @@ class BaseController extends ViewEngine{
     constructor(req, res) {
         super(req, res);
         //处理参数
-        let queryObj = {};
-        const urlObj = parse(req.url);
-        const paramObj = querystring.parse(urlObj.query);
+        // url query 参数
+        const urlObj = parse(req.url),
+            paramObj = querystring.parse(urlObj.query);
+        this.params = paramObj;
+        // post 参数
         try {
-            const postObj = req.post ? querystring.parse(req.post) : {};       //url 参数
-            Object.assign(queryObj, paramObj, postObj);
+            let postObj = req.post;
+            if (Object.prototype.toString.call(postObj) === '[object Object]') {
+                // multipart 类型
+            } else {
+                postObj = postObj ? querystring.parse(postObj) : {};
+            }
+            this.post = postObj;
         } catch (err) {
             console.log(err);
-            queryObj = paramObj;
         }
-        this.params = queryObj;
+        // files
+        this.files = req.files;
     }
 
 }

@@ -26,7 +26,7 @@ class Uastatistics extends BaseController {
 
 
     getdata() {
-        let _params = JSON.parse(this.params.dtGridPager);
+        let _params = JSON.parse(this.post.dtGridPager);
         let page = {
             nowPage: _params.nowPage,
             pageSize: _params.pageSize

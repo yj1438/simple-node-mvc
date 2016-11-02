@@ -16,11 +16,19 @@ gulp.task('clean', () => {
 
 gulp.task('babel', () => {
     return gulp.src(bebelFiles)
-        .pipe(cached('babel'))
+        // .pipe(cached('babel'))
         // .pipe(sourcemaps.init())
-        .pipe(babel())
+        .pipe(babel({
+            // presets: [
+            //     "latest"
+            // ],
+            plugins: [
+                // "transform-runtime",
+                "transform-es2015-modules-commonjs"
+            ]
+        }))
         // .pipe(sourcemaps.write('.'))
-        .pipe(remember('babel'))
+        // .pipe(remember('babel'))
         .pipe(gulp.dest(destPath));
 });
 
