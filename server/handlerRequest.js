@@ -66,6 +66,9 @@ export default async (req, res) => {
         httpError.handler500(req, res, 'ERROR: request Data error!');
         return;
     }
+    /*
+     * 指定对应的controller
+     */
     const actionInfo = route.getActionInfo(req.url, req.method);
     if (actionInfo.controller && actionInfo.action) {
         const Controller = require('./controllers/' + actionInfo.controller);
