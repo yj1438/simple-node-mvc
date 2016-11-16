@@ -21,6 +21,3 @@ http.createServer((req, res) => {
     res.writeHead(302, { "Location": "https://" + req.headers.host + req.url });
     res.end();
 }).listen(config.port_normal, config.host);
-
-
-

@@ -5,10 +5,6 @@ import BaseController from '../lib/BaseController';
 import Http2Service from '../service/http2Service';
 import RefService from '../service/refService';
 
-
-// exports.sortId = function () {
-// };
-
 class Uastatistics extends BaseController {
 
     constructor(req, res) {
