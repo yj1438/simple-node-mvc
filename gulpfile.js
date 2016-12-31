@@ -2,9 +2,9 @@
 
 const gulp = require('gulp');
 const babel = require('gulp-babel');
-const sourcemaps = require('gulp-sourcemaps');
-const cached = require('gulp-cached');
-const remember = require('gulp-remember');
+// const sourcemaps = require('gulp-sourcemaps');
+// const cached = require('gulp-cached');
+// const remember = require('gulp-remember');
 
 const bebelFiles = ['server/**/*.js'],
     destPath = 'build';

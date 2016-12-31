@@ -36,6 +36,7 @@ class ViewEngine extends HttpBase{
         const callbackFnName = this.params.callback;
         let strStream;
         if (callbackFnName) {
+            // jsonp 类型
             strStream = str2steam(callbackFnName + '(' + JSON.stringify(data) + ')');
         } else {
             strStream = str2steam(JSON.stringify(data));

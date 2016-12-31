@@ -21,10 +21,12 @@ class BaseController extends ViewEngine{
         this.params = paramObj;
         // post 参数
         try {
-            let postObj = req.post;
-            if (Object.prototype.toString.call(postObj) === '[object Object]') {
-                // multipart 类型
+            let postObj;
+            if (Object.prototype.toString.call(req.post) === '[object Object]') {
+                // multipart 类型的 POST body 是 object
+                postObj = req.post;
             } else {
+                // 一般的 x-www-form-urlencoded 是字符串
                 postObj = postObj ? querystring.parse(postObj) : {};
             }
             this.post = postObj;

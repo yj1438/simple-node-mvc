@@ -22,10 +22,9 @@ import StaticContent from './lib/StaticContent';
  * @returns Promise
  */
 function makePostData(req) {
-    //处理一般的 POST 数据 
-    // 如果是 form-data 形的数据，用 multiparty 处理
     return new Promise((resolve, reject) => {
         if (req.method.toLowerCase() === 'post' && req.headers['content-type'] === 'multipart/form-data') {
+            // 如果是 form-data 形的数据，用 multiparty 处理
             const form = new multiparty.Form();
             form.parse(req, (err, fields, files) => {
                 if (err) {
@@ -38,14 +37,16 @@ function makePostData(req) {
                 return;
             });
             return;
+        } else {
+            //处理一般的 x-www-form-urlencoded POST 类型数据 
+            let _postData = '';
+            req.on('data', (chunk) => {
+                _postData += chunk;
+            }).on('end', () => {
+                req.post = _postData;           // 此时的 post 是 string
+                resolve(req);
+            });
         }
-        let _postData = '';
-        req.on('data', (chunk) => {
-            _postData += chunk;
-        }).on('end', () => {
-            req.post = _postData;           // 此时的 post 是 string
-            resolve(req);
-        });
     });
 }
 
