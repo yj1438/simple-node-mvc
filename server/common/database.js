@@ -5,7 +5,7 @@ import Mysql from 'mysql';
 const DATABASE_INFO = {
     host: '121.42.176.100',
     user: 'root',
-    password: 'Yj@88.0101',
+    password: '123456',
     database: 'http2',
     multipleStatements: true,
     acquireTimeout: 3000,
