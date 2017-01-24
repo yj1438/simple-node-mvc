@@ -18,6 +18,7 @@ class ViewEngine extends HttpBase{
         super(req, res);
     }
 
+    // 渲染模板
     render(viewName, data) {
         let viewfile = path.join(basePath, 'server/views', viewName),
             output,
@@ -31,7 +32,7 @@ class ViewEngine extends HttpBase{
             return;
         }
     }
-
+    // 输出JSON接口
     renderJson(data) {
         const callbackFnName = this.params.callback;
         let strStream;

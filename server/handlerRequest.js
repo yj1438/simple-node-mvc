@@ -17,7 +17,7 @@ import StaticContent from './lib/StaticContent';
 
 /**
  * 组装 post 时提交的数据
- * 
+ * 这里区分了一下 form-data 和 x-www-form-urlencoded 的两种形式
  * @param {any} req
  * @returns Promise
  */
@@ -29,14 +29,11 @@ function makePostData(req) {
             form.parse(req, (err, fields, files) => {
                 if (err) {
                     reject(err);
-                    return;
                 }
                 req.post = fields;          // 此时的 post 是 object
                 req.files = files;
                 resolve(req);
-                return;
             });
-            return;
         } else {
             //处理一般的 x-www-form-urlencoded POST 类型数据 
             let _postData = '';

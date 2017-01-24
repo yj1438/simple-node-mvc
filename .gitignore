@@ -10,5 +10,8 @@ error.log
 out.log
 
 #
+.vscode
+
+#
 baidu_verify_*.html
 google*.html
