@@ -27,7 +27,7 @@ class BaseController extends ViewEngine{
                 postObj = req.post;
             } else {
                 // 一般的 x-www-form-urlencoded 是字符串
-                postObj = postObj ? querystring.parse(postObj) : {};
+                postObj = querystring.parse(req.post) || {};
             }
             this.post = postObj;
         } catch (err) {

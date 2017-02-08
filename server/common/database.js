@@ -5,8 +5,8 @@ import Mysql from 'mysql';
 const DATABASE_INFO = {
     host: '121.42.176.100',
     user: 'root',
-    password: '123456',
-    database: 'http2',
+    password: 'Yj@88.0101',
+    database: 'wx_shoplist',
     multipleStatements: true,
     acquireTimeout: 3000,
     waitForConnections: true,

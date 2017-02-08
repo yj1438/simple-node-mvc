@@ -67,6 +67,27 @@ module.exports = [
         url: /^\/compass(\/index)*/i,
         controller: 'compass',
         action: 'index'
-    }
+    },
+    //购物清单
+    {
+        method: 'get',
+        url: /^\/shopping\/autoLogin/i,
+        controller: 'shoppinglist',
+        action: 'autoLogin'
+    },
+    {
+        method: 'post',
+        url: /^\/shopping\/autoLogin/i,
+        controller: 'shoppinglist',
+        action: 'autoLogin'
+    },
+    //购物清单
+    {
+        method: 'get',
+        url: /^\/shopping\/initGroup/i,
+        controller: 'shoppinglist',
+        action: 'initGroup'
+    },
+
 
 ];

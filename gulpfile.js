@@ -3,8 +3,8 @@
 const gulp = require('gulp');
 const babel = require('gulp-babel');
 // const sourcemaps = require('gulp-sourcemaps');
-// const cached = require('gulp-cached');
-// const remember = require('gulp-remember');
+const cached = require('gulp-cached');
+const remember = require('gulp-remember');
 
 const bebelFiles = ['server/**/*.js'],
     destPath = 'build';
@@ -16,7 +16,7 @@ gulp.task('clean', () => {
 
 gulp.task('babel', () => {
     return gulp.src(bebelFiles)
-        // .pipe(cached('babel'))
+        .pipe(cached('babel'))
         // .pipe(sourcemaps.init())
         .pipe(babel({
             // presets: [
@@ -28,7 +28,7 @@ gulp.task('babel', () => {
             ]
         }))
         // .pipe(sourcemaps.write('.'))
-        // .pipe(remember('babel'))
+        .pipe(remember('babel'))
         .pipe(gulp.dest(destPath));
 });
 
