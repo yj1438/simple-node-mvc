@@ -16,6 +16,18 @@ const DATABASE_INFO = {
 
 const DB_POOL = Mysql.createPool(DATABASE_INFO);
 
+function getConnection() {
+    return new Promise((resolve, reject) => {
+        DB_POOL.getConnection((err, connection) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(connection);
+            }
+        });
+    });
+}
+
 class Database {
 
     /**
@@ -41,6 +53,7 @@ class Database {
         });
     }
     
+
     /**
      * 数据库执行 SQL 方法
      * sync
@@ -52,30 +65,49 @@ class Database {
      * 
      * @memberOf Database
      */
-    static handleSync(sql, data) {
-        let promise =  new Promise((resolve, reject) => {
-            DB_POOL.getConnection((err, connection) => {
-                if (err) {
-                    reject(err);
-                    return;
-                }
-                resolve(connection);
-            });
-        });
-        return promise
-            .then((connection) => {
-                return new Promise((resolve, reject) => {
-                    connection.query(sql, data, (err, result) => {
-                        if (err) {
-                            reject(err);
-                            return;
-                        }
-                        resolve(result);
-                    });
+    static async handleSync(sql, data) {
+        let connection = null;
+        try {
+            connection = await getConnection();
+        } catch (err) {
+            console.log(err);
+        }
+        return new Promise((resolve, reject) => {
+            if (connection) {
+                connection.query(sql, data, (err, result) => {
+                    if (err) {
+                        reject(err);
+                        return;
+                    }
+                    resolve(result);
                 });
-            }).catch((err) => {
-                console.log(err);
-            })
+            } else {
+                reject('数据库链接获取失败');
+            }
+        });
+        // let promise =  new Promise((resolve, reject) => {
+        //     DB_POOL.getConnection((err, connection) => {
+        //         if (err) {
+        //             reject(err);
+        //             return;
+        //         }
+        //         resolve(connection);
+        //     });
+        // });
+        // return promise
+        //     .then((connection) => {
+        //         return new Promise((resolve, reject) => {
+        //             connection.query(sql, data, (err, result) => {
+        //                 if (err) {
+        //                     reject(err);
+        //                     return;
+        //                 }
+        //                 resolve(result);
+        //             });
+        //         });
+        //     }).catch((err) => {
+        //         console.log(err);
+        //     })
     }
 }
 

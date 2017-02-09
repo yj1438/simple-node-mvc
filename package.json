@@ -7,7 +7,6 @@
     "art-template": "^3.0.3",
     "http2": "^3.3.4",
     "iscroll": "^5.2.0",
-    "jquery": "^2.2.4",
     "jssha": "^2.2.0",
     "merge": "^1.2.0",
     "multiparty": "^4.1.2",
@@ -23,10 +22,12 @@
     "babel-plugin-transform-runtime": "^6.15.0",
     "babel-preset-latest": "^6.16.0",
     "babel-preset-stage-3": "^6.17.0",
+    "del": "^2.2.2",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-cached": "^1.1.0",
     "gulp-remember": "^0.3.1",
-    "gulp-sourcemaps": "^2.2.0"
+    "gulp-sourcemaps": "^2.2.0",
+    "respawn": "^2.4.1"
   }
 }

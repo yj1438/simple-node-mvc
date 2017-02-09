@@ -7,8 +7,6 @@ import http from 'http';
 import config from './config';
 import handlerRequest from './handlerRequest';
 
-
-
 http2.createServer(config.certificate, function (req, res) {
     //server push 的例子，在频繁请求下会出错，还不清楚是什么情况
     /*
@@ -22,6 +20,7 @@ http2.createServer(config.certificate, function (req, res) {
 }).listen(config.port_ssl, config.host, function () {
     console.log('HTTP/2 Server running at https://' + config.host + ':' + config.port_ssl + '/');
 });
+
 
 /*
  * http 方式的 redirect
