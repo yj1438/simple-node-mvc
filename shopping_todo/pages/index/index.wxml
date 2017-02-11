@@ -45,6 +45,12 @@
 					<view wx:else class="todo" data-type="todo">我来做</view>
 					<!-- -->
 				</view>
+				<view class="other" wx:if="{{item.isDone == 1 && chooseIndex === index}}">
+					{{item.user.name}}正在做
+				</view>
+				<view class="other" wx:if="{{item.isDone == 2 && chooseIndex === index}}">
+					{{item.user.name}}已完成
+				</view>
 			</view>
 		</view>
 		<view class="need-item">
@@ -67,3 +73,5 @@
 		</view>
 	</view>
 </view>
+
+<include src="" src="secretEggs.wxml" />

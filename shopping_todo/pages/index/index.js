@@ -16,6 +16,9 @@ Page({
 		chooseIndex: null,
 		isEditing: false,
 		editValue: '',
+		// 彩蛋
+		activeEggs: false,
+		animationData: [],
 	},
 	onLoad: function (options) {
 		//调用应用实例的方法获取全局数据
@@ -49,6 +52,9 @@ Page({
 
 		// 	},
 		// });
+		setTimeout(() => {
+			this._activeSecretEggs();
+		}, 2000);
 	},
 	/**
 	 * 
@@ -262,5 +268,39 @@ Page({
 		const value = evt.detail.value || '请输入清单标题';
 		this.data.groupData.name = value;
 		this._setGroupData(this.data.groupId, this.data.groupData);
+	},
+	// 开始彩蛋
+	_activeSecretEggs: function () {
+		this.setData({
+			activeEggs: true,
+		});
+		const _animData = [];
+		let i = 6;
+		while (i > 0) {
+			const animation = _wx.createAnimation({
+				transformOrigin: "50% 50%",
+				duration: 2000,
+				timingFunction: "ease-in",
+				delay: 0 + i * 100,
+			});
+			_animData.push(animation);
+			--i;
+		}
+		this.animation = _animData;
+		console.log(this.animation);
+		const _animationData = this.data.animationData;
+		this.animation.forEach((item, index) => {
+			item.translateY(800).step();
+			_animationData[index] = item.export();
+		});
+		console.log(this.animation);
+		this.setData({
+			animationData: _animationData
+		});
+		setTimeout(() => {
+			this.setData({
+				activeEggs: false,
+			});
+		}, 3000);
 	}
 });

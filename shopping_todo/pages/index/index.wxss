@@ -115,6 +115,7 @@ page {
 	border-bottom: 1px solid #EEEEEE;
 	display: flex;
 	justify-content: space-between;
+	flex-wrap: wrap;
 }
 .needs .detail .cont {
 	line-height: 54rpx;
@@ -122,6 +123,10 @@ page {
 	display:flex;
 	width:480rpx;
 	justify-content:flex-start;
+}
+.needs .detail .other {
+	width: 100%;
+	flex-shrink: 0;
 }
 .cont image {
 	flex-shrink: 0;
@@ -190,3 +195,11 @@ page {
 image {
 	vertical-align: top;
 }
+
+
+
+
+
+
+/*============================*/
+@import "secretEggs.wxss";
