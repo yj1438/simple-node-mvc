@@ -1,10 +1,69 @@
 <!--index.wxml-->
 <view class="container">
-  <view  bindtap="bindViewTap" class="userinfo">
-    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
+	<view class="join-members">
+		<view class="title">成员{{groupData.members.length}}人</view>
+		<view class="member">
+			<block wx:for="{{groupData.members}}" wx:item="item" wx:index="index" wx:key="id">
+				<image class="avatar-1" src="../../avatar/{{item.avatar}}" data-name="{{item.name}}"/>
+			</block>
+		</view>
+	</view>
+	<view class="group-info">
+		<input placeholder="请输入清单标题" 
+			value="{{groupData.name === '请输入清单标题' ? '' : groupData.name}}"
+			placeholder-style="color: #cccccc"
+			bindinput="bindInputTitle"/>
+		<view class="btn-list" bindtap="bindTapGotoList">
+			<text>我的清单</text>
+		</view>
+	</view>
+	<view class="needs">
+		<view class="need-item" 
+			wx:for="{{groupData.list}}" wx:item="item" wx:index="index" wx:key="id"
+			bindtap="bindTapNeedItem"
+			data-i="{{index}}"
+			data-value="{{item}}">
+			<!-- -->
+			<view wx:if="{{item.isDone == 1}}" class="state doing"></view>
+			<view wx:elif="{{item.isDone == 2}}" class="state done"></view>
+			<view wx:elif="{{item.isMine}}" class="state mine"></view>
+			<view wx:else class="state todo"></view>
+			<!-- -->
+			<view wx:if="{{item.isDone == 2}}" class="mask"></view>
+			<!-- -->
+			<view class="detail">
+				<view class="cont">
+					<image wx:if="{{!item.user.isReal}}" src="../../avatar/{{item.user.avatar}}" class="avatar-2"/>
+					<image wx:else src="{{item.user.avatar}}" class="avatar-2"/>
+					<text>{{item.need}}</text>
+				</view>
+				<view class="operate">
+					<!-- -->
+					<view data-type="" wx:if="{{item.isDone == 1}}" class="doing">正在做...</view>
+					<view wx:elif="{{item.isDone == 2}}" class="done">已完成</view>
+					<view wx:elif="{{item.isMine}}" class="mine" data-type="mine">完成</view>
+					<view wx:else class="todo" data-type="todo">我来做</view>
+					<!-- -->
+				</view>
+			</view>
+		</view>
+		<view class="need-item">
+			<view class="btn-add"></view>
+			<view wx:if="{{!isEditing}}" class="detail" bindtap="bindTapEdit">
+				<text style="color: #CCCCCC">准备做什么？</text>
+			</view>
+			<view wx:else="{{isEditing}}" class="detail">
+				<view class="cont">
+					<image src="{{userInfo.avatarUrl}}" class="avatar-2"/>
+					<input style="display: inline-block;" 
+						bindinput="bintInput"
+						maxlength="60"
+						type="text" placeholder="" auto-focus />
+				</view>
+				<view class="operate">
+					<view class="btn" bindtap="bindTapSaveNeed">确定</view>
+				</view>
+			</view>
+		</view>
+	</view>
 </view>

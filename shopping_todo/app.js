@@ -39,7 +39,6 @@ App({
 							userInfo.iv = info.iv;
 							// 回调用户信息
 							this.globalData.userInfo = userInfo;
-							console.log(userInfo);
 							typeof cb === "function" && cb(this.globalData.userInfo)
 							wx.hideNavigationBarLoading();
 						}
