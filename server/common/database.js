@@ -75,7 +75,9 @@ class Database {
         return new Promise((resolve, reject) => {
             if (connection) {
                 connection.query(sql, data, (err, result) => {
+                    console.log('sql: >>> ' + sql + ' data: >>> ' + JSON.stringify(data));
                     if (err) {
+                        console.log('sql: error' + err);
                         reject(err);
                         return;
                     }

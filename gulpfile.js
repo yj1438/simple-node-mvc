@@ -37,7 +37,8 @@ function babelFn () {
             // ],
             plugins: [
                 // "transform-runtime",
-                "transform-es2015-modules-commonjs"
+                "transform-es2015-modules-commonjs",
+                "transform-class-properties"
             ]
         }))
         // .pipe(sourcemaps.write('.'))
@@ -53,7 +54,7 @@ gulp.task('default', ['babel'], () => {
 
     moveSSL();
 
-    const command = [ 'node', '--harmony' ];
+    const command = [ 'node', '--harmony', ];
     command.push('http2.js');
 
     const monitor = respawn(command, {
@@ -61,7 +62,7 @@ gulp.task('default', ['babel'], () => {
         cwd: destPath,
         maxRestarts: 10,
         sleep: 300,
-        stdio: 'inherit'
+        stdio: 'inherit',
     });
     monitor
         .on('stdout', (data) => console.log(data.toString()))
@@ -77,10 +78,9 @@ gulp.task('default', ['babel'], () => {
     let isError;
     const watch = gulp.watch(bebelFiles, (done) => {
         gutil.log(`Watch project is doing ...`);
-        console.log(done);
     });
     watch.on('change', (evt) => {
-        gutil.log(`File change : ${evt}`);
+        gutil.log(`File change : ${evt.path}`);
         babelFn()
             .on('error', () => {
                 isError = true;

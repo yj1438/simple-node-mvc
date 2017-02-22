@@ -38,7 +38,7 @@ class Route {
         method = method ? method.toLowerCase() : 'get';
         const pathname = parse(url).pathname,
             m_routes = routes[method];
-        let route = {
+        const route = {
             controller: null,
             action: null,
             args: null
@@ -53,6 +53,8 @@ class Route {
                 break;
             }            
         }
+        // 放松 controller 和 action 的配置校验
+        // if ()
         //如果匹配到route，r大概是 {controller:'blog', action:'index', args:['1']}
         return route;
     }

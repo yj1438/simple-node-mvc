@@ -68,7 +68,7 @@ module.exports = [
         controller: 'compass',
         action: 'index'
     },
-    //购物清单
+    //一起干干干
     {
         method: 'get',
         url: /^\/shopping\/autoLogin/i,
@@ -81,12 +81,41 @@ module.exports = [
         controller: 'shoppinglist',
         action: 'autoLogin'
     },
-    //购物清单
     {
         method: 'get',
-        url: /^\/shopping\/initGroup/i,
+        url: /^\/shopping\/getGroupList/i,
         controller: 'shoppinglist',
-        action: 'initGroup'
+        action: 'getGroupList'
+    },
+    {
+        method: 'get',
+        url: /^\/shopping\/createGroup/i,
+        controller: 'shoppinglist',
+        action: 'createGroup'
+    },
+    {
+        method: 'get',
+        url: /^\/shopping\/getGroupInfo/i,
+        controller: 'shoppinglist',
+        action: 'getGroupInfo'
+    },
+    {
+        method: 'get',
+        url: /^\/shopping\/addTodo/i,
+        controller: 'shoppinglist',
+        action: 'addTodo'
+    },
+    {
+        method: 'get',
+        url: /^\/shopping\/changeTodoState/i,
+        controller: 'shoppinglist',
+        action: 'changeTodoState'
+    },
+    {
+        method: 'get',
+        url: /^\/shopping\/modifyGroupName/i,
+        controller: 'shoppinglist',
+        action: 'modifyGroupName'
     },
 
 

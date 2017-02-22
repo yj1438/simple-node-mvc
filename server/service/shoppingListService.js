@@ -9,7 +9,31 @@ class ShoppingListService {
     }
 
     /**
+     * 通过 openid 来获取用户信息
      * 
+     * @param {any} openid
+     * @returns
+     * 
+     * @memberOf ShoppingListService
+     */
+    async getMemberByUid (uid) {
+        const sql = 'select * from member where id = ?';
+        let result = null;
+        try {
+            result = await Database.handleSync(sql, uid);
+            if (result.length > 0) {
+                result = result[0];
+            } else {
+                result = null;
+            }
+        } catch (err) {
+            console.log(err);
+        }
+        return result;
+    }
+
+    /**
+     * 通过 openid 来获取用户信息
      * 
      * @param {any} openid
      * @returns
@@ -21,16 +45,19 @@ class ShoppingListService {
         let result = null;
         try {
             result = await Database.handleSync(sql, openid);
+            if (result.length > 0) {
+                result = result[0];
+            } else {
+                result = null;
+            }
         } catch (err) {
             console.log(err);
         }
         return result;
     }
 
-
     /**
-     * 
-     * 
+     * 注册用户
      * @param {any} memberInfo
      * @returns
      * 
@@ -42,32 +69,30 @@ class ShoppingListService {
             openid: memberInfo.openId, 
             name: memberInfo.nickName, 
             nickname: memberInfo.nickName,
-            avatar: memberInfo.avatarUrl
+            avatar: memberInfo.avatarUrl,
+            create_ts: new Date().getTime(),
         };
         let result = null;
         try {
             result = await Database.handleSync(sql, data);
-            console.log(result);
         } catch (err) {
-            result = null;
             console.log(err);
         }
         return result;
     }
 
     /**
-     * 
-     * 
+     * 获取某一个用户的参加的群组
      * @param {any} openid
      * @returns
      * 
      * @memberOf ShoppingListService
      */
-    async getGroupByMember (openid) {
-        const sql = 'select * from group_info where id in (select group_id from group_member where openid = ?)';
+    async getGroupByMember (uid) {
+        const sql = 'select * from group_info where id in (select group_id from group_member where member_id = ?)';
         let result = null;
         try {
-            result = await Database.handleSync(sql, openid);
+            result = await Database.handleSync(sql, uid);
         } catch (err) {
             console.log(err);
         }
@@ -75,35 +100,205 @@ class ShoppingListService {
     }
 
     /**
-     * 
-     * 
+     * 创建群组
      * @param {any} memberInfo
      * @param {any} groupInfo
      * @returns
-     * 
      * @memberOf ShoppingListService
      */
     async createGroup (memberInfo, groupInfo) {
         const insertGroupInfoSql = 'insert into group_info set ?';
-        // const insertGroupMemberSql = 'insert info group_member set ?';
+        // const insertGroupMemberSql = 'insert into group_member set ?';
         const groupData = {
-            creator: memberInfo.openId,
+            creator_id: memberInfo.id,
             name: groupInfo.name || (memberInfo.name + '的清单'),
-            create_ts: new Date().getTime()
+            create_ts: new Date().getTime(),
         };
-        let result1 = null,
-            result2 = null;
+        // const groupMemberData = {
+        //     group_id: '',
+        //     member_id: memberInfo.id,
+        //     create_ts: new Date().getTime(),
+        // };
+        let result = null,
+            result_member = null;
         try {
-            result1 = await Database.handleSync(insertGroupInfoSql, groupData);
+            result = await Database.handleSync(insertGroupInfoSql, groupData);
+            result_member = await this.joinGroup(result.insertId, memberInfo.id);
         } catch (err) {
             console.log(err);
         }
-        return result1;
-        // const groupMember = {
-        //     group_id: 
-        // }
+        return {
+            group_id: result.insertId,
+            group_member_id: result_member,
+        };
     }
 
+    /**
+     * 将某一用户拉进群组
+     * 
+     * @param {any} group_id 
+     * @param {any} member_id 
+     * @returns 
+     * 
+     * @memberOf ShoppingListService
+     */
+    async joinGroup (group_id, member_id) {
+        const insertGroupMemberSql = 'insert into group_member set ?';
+        const sqlData = {
+            group_id: group_id,
+            member_id: member_id,
+            create_ts: new Date().getTime(),
+        };
+        let result = null;
+        try {
+            result = await Database.handleSync(insertGroupMemberSql, sqlData);
+        } catch (err) {
+            console.log(err);
+        }
+        return result.insertId;
+    }
+
+    async getGroupInfo (group_id) {
+        const sql = `select a.id, a.creator_id, b.name as creator_name, a.name, b.avatar, a.create_ts from group_info a 
+                    left join member b
+                    on (a.creator_id = b.id)
+                    where a.id = ?`;
+        let result = null;
+        try {
+            result = await Database.handleSync(sql, group_id);
+            if (result.length > 0) {
+                result = result[0];
+            } else {
+                result = null;
+            }
+        } catch (err) {
+            console.log(err);
+        }
+        return result;
+    }
+
+    /**
+     * 修改群组在的基本信息
+     * 目前只是用来修改名称的
+     * @param {any} group_id 
+     * @param {any} data 
+     * @returns 
+     * @memberOf ShoppingListService
+     */
+    async editGroup (group_id, data) {
+        const sql = 'update group_info a set ? where a.id = \'' + group_id + '\'';
+        let result = null;
+        try {
+            result = await Database.handleSync(sql, data);
+            if (result.changedRows) {
+                result = true;
+            } else {
+                result = false;
+            }
+        } catch (err) {
+            console.log(err);
+        }
+        return result;
+    }
+
+    async getMemberByGroup (group_id) {
+        const sql = 'select a.group_id, a.member_id, b.name, b.nickname, b.avatar from group_member a, member b where a.`member_id` = b.`id` and a.`group_id` = ?';
+        let result = [];
+        try {
+            result = await Database.handleSync(sql, group_id);
+        } catch (err) {
+            console.log(err);
+        }
+        return result;
+    }
+
+    async getTodoListByGroup (group_id) {
+        const sql = `select a.id, a.todo_cont, a.present_ts, a.finish_ts, a.state, b.id as presenter_id, b.name as presenter_name, b.avatar as presenter_avatar, c.name as finisher_id, c.name as finisher_name, c.avatar as finisher_avatar 
+                from group_todos a
+                left join member b 
+                on (a.presenter_id = b.id)
+                left join member c
+                on (a.finisher_id = c.id)
+                where group_id = ?`;
+        let result = [];
+        try {
+            result = await Database.handleSync(sql, group_id);
+        } catch (err) {
+            console.log(err);
+        }
+        return result;
+    }
+
+    /**
+     * 添加一个 todo 清单项目
+     * 
+     * @param {any} todoInfo 
+     *  {
+     *      group_id
+     *      todo_cont
+     *      presenter_id
+     *  }
+     * @returns 
+     * 
+     * @memberOf ShoppingListService
+     */
+    async addTodo (todoInfo) {
+        const sql = 'insert into group_todos set ?';
+        todoInfo.present_ts = new Date().getTime();
+        todoInfo.state = 0;
+        let result = null;
+        try {
+            result = await Database.handleSync(sql, todoInfo);
+            result = result.insertId;
+        } catch (err) {
+            console.log(err);
+        }
+        return result;
+    }
+
+    async countMemberByGroup (group_id) {
+        const sql = 'select count(*) as count from group_member where group_id=?';
+        let result = 0;
+        try {
+            result = await Database.handleSync(sql, group_id);
+            if (result.length > 0) {
+                result = result[0].count;
+            } else {
+                result = 0;
+            }
+        } catch (err) {
+            console.log(err);
+        }
+        return result;
+    }
+
+    async countTodoByGroup (group_id, state) {
+        const sql = 'select count(*) as count from group_todos where group_id=?'
+            + (state !== undefined ? (' and state=' + state) : '');
+        let result = 0;
+        try {
+            result = await Database.handleSync(sql, group_id);
+            if (result.length > 0) {
+                result = result[0].count;
+            } else {
+                result = 0;
+            }
+        } catch (err) {
+            console.log(err);
+        }
+        return result;
+    }
+
+    async editTodo (todoId, todoInfo) {
+        const sql = 'update group_todos a set ? where a.id=\'' + todoId + '\'';
+        let result = 0;
+        try {
+            result = await Database.handleSync(sql, todoInfo);
+        } catch (err) {
+            console.log(err);
+        }
+        return result;
+    }
 }
 
 export default ShoppingListService;
