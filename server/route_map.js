@@ -117,6 +117,12 @@ module.exports = [
         controller: 'shoppinglist',
         action: 'modifyGroupName'
     },
+    {
+        method: 'get',
+        url: /^\/shopping\/joinGroup/i,
+        controller: 'shoppinglist',
+        action: 'joinGroup'
+    },
 
 
 ];

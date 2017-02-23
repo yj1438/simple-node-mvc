@@ -73,10 +73,6 @@ class ShoppingList extends BaseController {
         const uid = this.params.login_string;
         try {
             const groups = await this.shoppingListService.getGroupByMember(uid);
-            for (const group of groups) {
-                group.memberCount = await this.shoppingListService.countMemberByGroup(group.id);
-                group.todoCount = await this.shoppingListService.countTodoByGroup(group.id, 0);
-            }
             this.renderJson({
                 status: 'success',
                 data: groups,
@@ -254,9 +250,17 @@ class ShoppingList extends BaseController {
         const uid = this.params.login_string;
         const group_id = this.params.group_id;
         try {
-
+            const result = await this.shoppingListService.joinGroup(group_id, uid);
+            this.renderJson({
+                status: 'success',
+                data: {group_member_id: result,},
+            });
         } catch (err) {
-
+            console.log(err);
+            this.renderJson({
+                status: 'fail',
+                message: '加入群组失败',
+            });
         }
     }
 

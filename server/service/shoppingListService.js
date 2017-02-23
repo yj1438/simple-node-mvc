@@ -89,7 +89,19 @@ class ShoppingListService {
      * @memberOf ShoppingListService
      */
     async getGroupByMember (uid) {
-        const sql = 'select * from group_info where id in (select group_id from group_member where member_id = ?)';
+        const sql = `select * from (select * from group_info a where id in (select group_id from group_member where member_id = 22)) t
+                    left join (
+                        select group_id as group_id_m, count(group_id) as count_member
+                        from group_member group by group_id
+                    ) t1
+                    on t.id = t1.group_id_m
+                    left join (
+                        select group_id as group_id_t, count(group_id) as count_todo
+                        from group_todos group by group_id
+                    ) t2
+                    on t.id = t2.group_id_t
+                    order by t.create_ts desc
+                    `;
         let result = null;
         try {
             result = await Database.handleSync(sql, uid);
@@ -143,19 +155,27 @@ class ShoppingListService {
      * @memberOf ShoppingListService
      */
     async joinGroup (group_id, member_id) {
+        const findGroupMember = 'select a.id from group_member a where a.group_id=? and member_id=?'
         const insertGroupMemberSql = 'insert into group_member set ?';
         const sqlData = {
             group_id: group_id,
             member_id: member_id,
             create_ts: new Date().getTime(),
         };
+        let hasjoined = false;
         let result = null;
         try {
-            result = await Database.handleSync(insertGroupMemberSql, sqlData);
+            hasjoined = await Database.handleSync(findGroupMember, [group_id, member_id,]);
+            if (hasjoined.length > 0) {
+                result = hasjoined[0].id;
+            } else {
+                result = await Database.handleSync(insertGroupMemberSql, sqlData);
+                result = result.insertId;
+            }
         } catch (err) {
             console.log(err);
         }
-        return result.insertId;
+        return result;
     }
 
     async getGroupInfo (group_id) {

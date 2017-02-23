@@ -1,35 +1,53 @@
-'use strict';
-
 import Mysql from 'mysql';
-
-const DATABASE_INFO = {
-    host: '121.42.176.100',
-    user: 'root',
-    password: 'Yj@88.0101',
-    database: 'wx_shoplist',
-    multipleStatements: true,
-    acquireTimeout: 3000,
-    waitForConnections: true,
-    connectionLimit: 2048,
-    queueLimit: 600
-};
-
-const DB_POOL = Mysql.createPool(DATABASE_INFO);
-
-function getConnection() {
-    return new Promise((resolve, reject) => {
-        DB_POOL.getConnection((err, connection) => {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(connection);
-            }
-        });
-    });
-}
 
 class Database {
 
+    /**
+     * 数据库默认配置项
+     * @static
+     * @memberOf Database
+     */
+    static DATABASE_INFO = {
+        host: '121.42.176.100',
+        user: 'root',
+        password: 'Yj@88.0101',
+        database: 'wx_shoplist',
+        multipleStatements: true,
+        acquireTimeout: 3000,
+        waitForConnections: true,
+        connectionLimit: 2048,
+        queueLimit: 600,
+    };
+
+    /**
+     * 取数据库单例
+     * @static
+     * @returns 
+     * 
+     * @memberOf Database
+     */
+    static getInstance () {
+        if (!Database.instance) {
+            Database.instance = new Database(Database.DATABASE_INFO);
+        }
+        return Database.instance;
+    }
+
+    constructor (databaseConfig) {
+        this.DB_POOL = Mysql.createPool(databaseConfig);
+    }
+    
+    _getConnection() {
+        return new Promise((resolve, reject) => {
+            this.DB_POOL.getConnection((err, connection) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(connection);
+                }
+            });
+        });
+    }
     /**
      * 数据库执行 SQL 方法
      * 
@@ -40,8 +58,19 @@ class Database {
      * 
      * @memberOf Database
      */
-    static handle(sql, data, callback) {
-        DB_POOL.getConnection((err, connection) => {
+    handle(sql, data, callback) {
+        this._getConnection()
+            .then((connection) => {
+                connection.query(sql, data, (err, result) => {
+                    callback.call(connection, err, result);
+                    connection.release();
+                });
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        /*
+        this.DB_POOL.getConnection((err, connection) => {
             if (err) {
                 console.log(err);
             } else {
@@ -51,9 +80,8 @@ class Database {
                 });
             }
         });
+        */
     }
-    
-
     /**
      * 数据库执行 SQL 方法
      * sync
@@ -65,17 +93,20 @@ class Database {
      * 
      * @memberOf Database
      */
-    static async handleSync(sql, data) {
+    async handleSync(sql, data) {
         let connection = null;
         try {
-            connection = await getConnection();
+            connection = await this._getConnection();
         } catch (err) {
             console.log(err);
         }
         return new Promise((resolve, reject) => {
             if (connection) {
                 connection.query(sql, data, (err, result) => {
-                    console.log('sql: >>> ' + sql + ' data: >>> ' + JSON.stringify(data));
+                    /**
+                     * sql检控
+                     */
+                    // console.log('sql: >>> ' + sql + ' data: >>> ' + JSON.stringify(data));
                     if (err) {
                         console.log('sql: error' + err);
                         reject(err);
@@ -87,30 +118,7 @@ class Database {
                 reject('数据库链接获取失败');
             }
         });
-        // let promise =  new Promise((resolve, reject) => {
-        //     DB_POOL.getConnection((err, connection) => {
-        //         if (err) {
-        //             reject(err);
-        //             return;
-        //         }
-        //         resolve(connection);
-        //     });
-        // });
-        // return promise
-        //     .then((connection) => {
-        //         return new Promise((resolve, reject) => {
-        //             connection.query(sql, data, (err, result) => {
-        //                 if (err) {
-        //                     reject(err);
-        //                     return;
-        //                 }
-        //                 resolve(result);
-        //             });
-        //         });
-        //     }).catch((err) => {
-        //         console.log(err);
-        //     })
     }
 }
 
-export default Database;
+export default Database.getInstance();
