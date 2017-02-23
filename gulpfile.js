@@ -38,8 +38,8 @@ function babelFn () {
             plugins: [
                 // "transform-runtime",
                 "transform-es2015-modules-commonjs",
-                "transform-class-properties"
-            ]
+                "transform-class-properties",
+            ],
         }))
         // .pipe(sourcemaps.write('.'))
         .pipe(remember('babel'))
@@ -55,7 +55,7 @@ gulp.task('default', ['babel'], () => {
     moveSSL();
 
     const command = [ 'node', '--harmony', ];
-    command.push('http2.js');
+    command.push('http.js');
 
     const monitor = respawn(command, {
         env,

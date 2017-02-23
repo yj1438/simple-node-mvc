@@ -28,35 +28,39 @@ class ShoppingList extends BaseController {
             + '&secret=' + WXconfig.WX_MINI_SECRET 
             + '&js_code=' + code 
             + '&grant_type=authorization_code';
-        
         request(loginUrl,
             async (error, response, body) => {
                 if (!error && response.statusCode === 200) {
                     const result = JSON.parse(body);
                     const openid = result.openid;
-                    const session_key = result.session_key;
-                    const pc = new WXBizDataCrypt(WXconfig.WX_MINI_ID, session_key)
-                    const decryptData = pc.decryptData(encryptedData , iv);
-                    
-                    let member = await this.shoppingListService.getMemberByOpenid(openid);
-                    delete decryptData.watermark;
-                    if (member) {
-                        decryptData.uid = member.id;
-                        this.renderJson({
-                            status: 'success',
-                            data: decryptData,
-                        });
-                        // ShoppingListStorage.setMember(openid, member);
+                    if (openid) {
+                        const session_key = result.session_key;
+                        const pc = new WXBizDataCrypt(WXconfig.WX_MINI_ID, session_key)
+                        const decryptData = pc.decryptData(encryptedData , iv);
+                        
+                        let member = await this.shoppingListService.getMemberByOpenid(openid);
+                        delete decryptData.watermark;
+                        if (member) {
+                            decryptData.uid = member.id;
+                            this.renderJson({
+                                status: 'success',
+                                data: decryptData,
+                            });
+                        } else {
+                            let result = await this.shoppingListService.registerMember(decryptData);
+                            decryptData.uid = result.insertId;
+                            this.renderJson({
+                                status: 'success',
+                                data: decryptData,
+                            });
+                        }
                     } else {
-                        let result = await this.shoppingListService.registerMember(decryptData);
-                        decryptData.uid = result.insertId;
                         this.renderJson({
-                            status: 'success',
-                            data: decryptData,
+                            status: 'fail',
+                            message: result.errmsg,
+                            data: result,
                         });
-                        // ShoppingListStorage.setMember(openid, decryptData);
                     }
-
                 } else {
                     this.renderJson({
                         status: 'fail',

@@ -8,10 +8,10 @@ import handlerRequest from './handlerRequest';
 /*
  * http 方式的 redirect
  */
-http.createServer(function (req, res) {
+http.createServer((req, res) => {
     handlerRequest(req, res);
-}).listen(config.port_ssl, config.host, () => {
-    console.log('SPDY Server running at http://' + config.host + ':' + 80 + '/');
-}).on('error', function (err) {
+}).listen(config.port_normal, config.host, () => {
+    console.log('SPDY Server running at http://' + config.host + ':' + config.port_normal + '/');
+}).on('error', (err) => {
     this.emit(err);
 });
