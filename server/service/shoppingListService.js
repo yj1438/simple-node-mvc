@@ -89,7 +89,7 @@ class ShoppingListService {
      * @memberOf ShoppingListService
      */
     async getGroupByMember (uid) {
-        const sql = `select * from (select * from group_info a where id in (select group_id from group_member where member_id = 22)) t
+        const sql = `select * from (select * from group_info a where id in (select group_id from group_member where member_id = ?)) t
                     left join (
                         select group_id as group_id_m, count(group_id) as count_member
                         from group_member group by group_id
@@ -97,7 +97,7 @@ class ShoppingListService {
                     on t.id = t1.group_id_m
                     left join (
                         select group_id as group_id_t, count(group_id) as count_todo
-                        from group_todos group by group_id
+                        from group_todos where state=0 group by group_id
                     ) t2
                     on t.id = t2.group_id_t
                     order by t.create_ts desc
@@ -233,7 +233,7 @@ class ShoppingListService {
     }
 
     async getTodoListByGroup (group_id) {
-        const sql = `select a.id, a.todo_cont, a.present_ts, a.finish_ts, a.state, b.id as presenter_id, b.name as presenter_name, b.avatar as presenter_avatar, c.name as finisher_id, c.name as finisher_name, c.avatar as finisher_avatar 
+        const sql = `select a.id, a.todo_cont, a.present_ts, a.finish_ts, a.state, b.id as presenter_id, b.name as presenter_name, b.avatar as presenter_avatar, c.id as finisher_id, c.name as finisher_name, c.avatar as finisher_avatar 
                 from group_todos a
                 left join member b 
                 on (a.presenter_id = b.id)

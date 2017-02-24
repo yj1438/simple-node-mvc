@@ -113,6 +113,7 @@ class Database {
                         return;
                     }
                     resolve(result);
+                    connection.release();
                 });
             } else {
                 reject('数据库链接获取失败');
