@@ -3,6 +3,7 @@
 
 import { parse } from 'url';
 import route_map from '../route_map';
+import config from '../config';
 
 //根据http请求的method来分别保存route规则
 let routes = {
@@ -36,8 +37,13 @@ class Route {
     static getActionInfo(url, method) {
         // url: /blog/index?page=1 ,则pathname为: /blog/index
         method = method ? method.toLowerCase() : 'get';
-        const pathname = parse(url).pathname,
+        let pathname = parse(url).pathname,
             m_routes = routes[method];
+        console.log(pathname);
+        if (pathname.indexOf(config.routePrefix) === 0) {
+            pathname = pathname.replace(config.routePrefix, '');
+        }
+        console.log(pathname);
         const route = {
             controller: null,
             action: null,

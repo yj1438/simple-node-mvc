@@ -28,5 +28,7 @@ export default {
      * 0: 没有缓存
      */
     cacheControl : 7 * 24 * 3600,            //浏览器缓存时间（秒）
+
+    routePrefix: '/mini-program-together',      // 路由前缀
     
 };
