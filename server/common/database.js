@@ -8,9 +8,9 @@ class Database {
      * @memberOf Database
      */
     static DATABASE_INFO = {
-        host: '121.42.176.100',
+        host: 'localhost',
         user: 'root',
-        password: 'Yj@88.0101',
+        password: 'WX_mini@bbt2017',
         database: 'wx_shoplist',
         multipleStatements: true,
         acquireTimeout: 3000,
