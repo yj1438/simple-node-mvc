@@ -123,6 +123,18 @@ module.exports = [
         controller: 'shoppinglist',
         action: 'joinGroup'
     },
+    {
+        method: 'get',
+        url: /^\/shopping\/deleteGroup/i,
+        controller: 'shoppinglist',
+        action: 'deleteGroup'
+    },
+    {
+        method: 'get',
+        url: /^\/shopping\/deleteTodo/i,
+        controller: 'shoppinglist',
+        action: 'deleteTodo'
+    },
 
 
 ];

@@ -226,7 +226,7 @@ class ShoppingList extends BaseController {
                 state: state,
             };
             const result = await this.shoppingListService.editTodo(todo_id, editData);
-            if (result.changedRows) {
+            if (result) {
                 this.renderJson({
                     status: 'success',
                     data: result,
@@ -268,6 +268,59 @@ class ShoppingList extends BaseController {
         }
     }
 
+    async deleteGroup () {
+        const uid = this.params.login_string;
+        const group_id = this.params.group_id;
+        try {
+            const result = await this.shoppingListService.deleteGroup(group_id, uid);
+            if (result) {
+                this.renderJson({
+                    status: 'success',
+                    data: result,
+                });
+            } else {
+                this.renderJson({
+                    status: 'fail',
+                    data: '只能删除自己创建的群组',
+                });
+            }
+        } catch (err) {
+            console.log(err);
+            this.renderJson({
+                status: 'fail',
+                message: '删除群组失败',
+            });
+        }
+    }
+
+    async deleteTodo () {
+        const uid = this.params.login_string;
+        const group_id = this.params.group_id;
+        const todo_id = this.params.todo_id;
+        try {
+            const result = await this.shoppingListService.deleteTodo(todo_id, group_id, uid);
+            if (result) {
+                this.renderJson({
+                    status: 'success',
+                    data: result,
+                });
+            } else {
+                this.renderJson({
+                    status: 'fail',
+                    data: '只能删除自己提出的需求',
+                });
+            }
+        } catch (err) {
+            console.log(err);
+            this.renderJson({
+                status: 'fail',
+                message: '删除失败',
+            });
+        }
+    }
+
 }
 
 export default ShoppingList;
+
+

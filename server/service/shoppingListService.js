@@ -97,7 +97,7 @@ class ShoppingListService {
                     on t.id = t1.group_id_m
                     left join (
                         select group_id as group_id_t, count(group_id) as count_todo
-                        from group_todos where state=0 group by group_id
+                        from group_todos where state<2 group by group_id
                     ) t2
                     on t.id = t2.group_id_t
                     order by t.create_ts desc
@@ -252,7 +252,7 @@ class ShoppingListService {
     /**
      * 添加一个 todo 清单项目
      * 
-     * @param {any} todoInfo 
+     * @param {any} todo_info 
      *  {
      *      group_id
      *      todo_cont
@@ -262,13 +262,13 @@ class ShoppingListService {
      * 
      * @memberOf ShoppingListService
      */
-    async addTodo (todoInfo) {
+    async addTodo (todo_info) {
         const sql = 'insert into group_todos set ?';
-        todoInfo.present_ts = new Date().getTime();
-        todoInfo.state = 0;
+        todo_info.present_ts = new Date().getTime();
+        todo_info.state = 0;
         let result = null;
         try {
-            result = await Database.handleSync(sql, todoInfo);
+            result = await Database.handleSync(sql, todo_info);
             result = result.insertId;
         } catch (err) {
             console.log(err);
@@ -309,11 +309,54 @@ class ShoppingListService {
         return result;
     }
 
-    async editTodo (todoId, todoInfo) {
-        const sql = 'update group_todos a set ? where a.id=\'' + todoId + '\'';
-        let result = 0;
+    async editTodo (todo_id, todo_info) {
+        const sql = 'update group_todos a set ? where a.id=\'' + todo_id + '\'';
+        let result = false;
         try {
-            result = await Database.handleSync(sql, todoInfo);
+            result = await Database.handleSync(sql, todo_info);
+            if (result.changedRows) {
+                result = true;
+            }
+        } catch (err) {
+            console.log(err);
+        }
+        return result;
+    }
+
+    async deleteGroup (group_id, uid) {
+        if (!group_id || !uid) {
+            return false;
+        }
+        const sql = 'delete from group_info where id=? and creator_id=?';
+        // 现在保留脏数据，只删除群组，不删除群组清单
+        // const sqlForTodos = 'delete from group_todos where group_id=?';
+        let result = false;
+        try {
+            result = await Database.handleSync(sql, [group_id, uid,]);
+            if (result.changedRows) {
+                result = true;
+            } else {
+                result = false;
+            }
+        } catch (err) {
+            console.log(err);
+        }
+        return result;
+    }
+
+    async deleteTodo (todo_id, group_id, uid) {
+        if (!group_id || !group_id || !uid) {
+            return false;
+        }
+        const sql = 'delete from group_todos where id=? and group_id=? and presenter_id=?';
+        let result = false;
+        try {
+            result = await Database.handleSync(sql, [todo_id, group_id, uid,]);
+            if (result.affectedRows) {
+                result = true;
+            } else {
+                result = false;
+            }
         } catch (err) {
             console.log(err);
         }

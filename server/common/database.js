@@ -9,8 +9,8 @@ class Database {
      */
     static DATABASE_INFO = {
         host: 'localhost',
-        user: 'root',
         password: 'WX_mini@bbt2017',
+        user: 'root',
         database: 'wx_shoplist',
         multipleStatements: true,
         acquireTimeout: 3000,
@@ -37,6 +37,11 @@ class Database {
         this.DB_POOL = Mysql.createPool(databaseConfig);
     }
     
+    /**
+     * 从连接池中获取一个连接
+     * @returns 
+     * @memberOf Database
+     */
     _getConnection() {
         return new Promise((resolve, reject) => {
             this.DB_POOL.getConnection((err, connection) => {
@@ -69,18 +74,6 @@ class Database {
             .catch((err) => {
                 console.log(err);
             });
-        /*
-        this.DB_POOL.getConnection((err, connection) => {
-            if (err) {
-                console.log(err);
-            } else {
-                connection.query(sql, data, (err, result) => {
-                    callback.call(connection, err, result);
-                    connection.release();
-                });
-            }
-        });
-        */
     }
     /**
      * 数据库执行 SQL 方法

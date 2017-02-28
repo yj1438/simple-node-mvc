@@ -55,7 +55,7 @@ gulp.task('default', ['babel'], () => {
     moveSSL();
 
     const command = [ 'node', '--harmony', ];
-    command.push('http.js');
+    command.push('http2.js');
 
     const monitor = respawn(command, {
         env,
