@@ -13,5 +13,7 @@ http.createServer((req, res) => {
 }).listen(config.port_normal, config.host, () => {
     console.log('SPDY Server running at http://' + config.host + ':' + config.port_normal + '/');
 }).on('error', (err) => {
-    this.emit(err);
+    console.log(err);
+    throw err;
+    // this.emit(err);
 });
