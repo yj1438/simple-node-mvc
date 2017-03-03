@@ -333,7 +333,7 @@ class ShoppingListService {
         let result = false;
         try {
             result = await Database.handleSync(sql, [group_id, uid,]);
-            if (result.changedRows) {
+            if (result.affectedRows) {
                 result = true;
             } else {
                 result = false;
