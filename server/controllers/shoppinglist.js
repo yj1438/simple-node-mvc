@@ -36,7 +36,7 @@ class ShoppingList extends BaseController {
                     if (openid) {
                         const session_key = result.session_key;
                         const pc = new WXBizDataCrypt(WXconfig.WX_MINI_ID, session_key)
-                        const decryptData = pc.decryptData(encryptedData , iv);
+                        const decryptData = pc.decryptData(encryptedData, iv);
                         
                         let member = await this.shoppingListService.getMemberByOpenid(openid);
                         delete decryptData.watermark;
