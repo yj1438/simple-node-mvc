@@ -1,7 +1,7 @@
 
 'use strict';
 
-import { parse } from 'url';
+import { parse, } from 'url';
 import route_map from '../route_map';
 import config from '../config';
 
