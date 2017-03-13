@@ -20,7 +20,7 @@ class ViewEngine extends HttpBase{
 
     // 渲染模板
     render(viewName, data) {
-        let viewfile = path.join(basePath, 'server/views', viewName),
+        let viewfile = path.join(basePath, 'views', viewName),
             output,
             strStream;
         try {

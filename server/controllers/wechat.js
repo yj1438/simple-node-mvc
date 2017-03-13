@@ -2,9 +2,9 @@
 
 import BaseController from '../lib/BaseController';
 
-import getTicket from './../common/wechat/getTicket';
-import getSign from './../common/wechat/getSign';
-import APP_KEY from './../common/wechat/AppKey';
+import getTicket from '../common/wechat/getTicket';
+import getSign from '../common/wechat/getSign';
+import APP_KEY from '../common/wechat/AppKey';
 
 /**
  * 获取微信 JS SDK 的 ticket
@@ -17,7 +17,7 @@ class Wechat extends BaseController {
     
     get_js_api_sign() {
         //設定簽名URL來源
-        const refer = this.req.headers['referer'] || 'http://yinjie.dev.babytree-inc.com/app/dayima/index/index';
+        const refer = this.req.headers['referer'];
         // 簽名
         let sign = null;
         console.log(refer);

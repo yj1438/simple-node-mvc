@@ -14,7 +14,6 @@ import StaticContent from './lib/StaticContent';
 //});
 //===
 
-
 /**
  * 组装 post 时提交的数据
  * 这里区分了一下 form-data 和 x-www-form-urlencoded 的两种形式
@@ -68,6 +67,7 @@ export default async (req, res) => {
      * 指定对应的controller
      */
     const actionInfo = route.getActionInfo(req.url, req.method);
+    console.log(actionInfo);
     if (actionInfo.controller && actionInfo.action) {
         const Controller = require('./controllers/' + actionInfo.controller);
         try {
@@ -77,7 +77,7 @@ export default async (req, res) => {
              * 所以這個地方需要 new Controller.default 而不是正常的 new Controller
              */
             const controllerContext = new Controller.default(_req, res);
-            controllerContext[actionInfo.action]();
+            controllerContext[actionInfo.action](actionInfo.args);
         } catch (err) {
             console.log(err);
             httpError.handler500(req, res, 'ERROR: controller "' + actionInfo.controller + '" without action "' + actionInfo.action + '"');

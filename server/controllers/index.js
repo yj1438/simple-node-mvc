@@ -35,7 +35,7 @@ class Index extends BaseController{
     2:
     * UA_PARSE_URL = 'http://www.useragentstring.com/?uas=' + encodeURIComponent(userAgent) + '&getJSON=all';
     */
-    makeUaData(userAgent, callback) {
+    _makeUaData(userAgent, callback) {
         let data = {},
             uaData = {};
 
@@ -129,7 +129,7 @@ class Index extends BaseController{
                         * 此时还没有入表，所以会造成重复 hash_id 入表的情况
                         * 所以有了uaDataStore
                         */
-                        this.makeUaData(userAgent, uaData => {
+                        this._makeUaData(userAgent, uaData => {
                             if (!uaData) {
                                 uaDataStore.remove(hashId);
                                 return;

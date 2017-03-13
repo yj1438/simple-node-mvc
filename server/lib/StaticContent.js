@@ -8,6 +8,8 @@ import config from '../config';
 import HttpBase from './HttpBase';
 
 
+const StaticDir = path.resolve(process.cwd(), '..', config.staticFileDir);
+
 class StaticContent extends HttpBase{
 
     constructor(req, res) {
@@ -16,11 +18,11 @@ class StaticContent extends HttpBase{
 
     handle(filePath) {
         if (!filePath) {
-            filePath = path.join(process.cwd(), config.staticFileDir, url.parse(this.req.url).pathname);
+            filePath = path.join(StaticDir, url.parse(this.req.url).pathname);
         }
-        console.log(filePath);
+        // console.log(filePath);
         //进行目录权限的判断
-        let relativePath = path.relative(path.join(process.cwd(), config.staticFileDir), filePath);
+        let relativePath = path.relative(StaticDir, filePath);
         if (relativePath.indexOf('..') > -1) {
             this._404(this.req, this.res);
             return;

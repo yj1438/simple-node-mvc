@@ -8,10 +8,10 @@ class Database {
      * @memberOf Database
      */
     static DATABASE_INFO = {
-        host: '121.42.176.100',
-        password: 'Yj@88.0101',
+        host: 'localhost',
+        password: '123456',
         user: 'root',
-        database: 'http2',
+        database: 'haha',
         multipleStatements: true,
         acquireTimeout: 3000,
         waitForConnections: true,

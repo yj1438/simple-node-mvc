@@ -7,23 +7,29 @@ const gutil = require('gulp-util');
 const babel = require('gulp-babel');
 // const sourcemaps = require('gulp-sourcemaps');
 const cached = require('gulp-cached');
-const remember = require('gulp-remember');
+// const remember = require('gulp-remember');
 const respawn = require('respawn');
 const del = require('del');
 
-const bebelFiles = ['server/**/*.js'],
+const bebelFiles = ['server/**/*.js',],
     destPath = 'build';
 
 const env = process.env;
 env.NODE_PATH = env.NODE_PATH || path.resolve(__dirname, destPath);
 env.NODE_ENV = env.NODE_ENV || 'development';
 
-gulp.task('clean', () => {
+function clean () {
     return del([ destPath, ]);
-});
+}
 
 function moveSSL () {
     return gulp.src('server/SSL/*', {base: 'server',})
+        .pipe(gulp.dest(destPath));
+}
+
+function moveTpl () {
+    return gulp.src('server/views/**/*.html', {base: 'server',})
+        .pipe(cached('tpl'))
         .pipe(gulp.dest(destPath));
 }
 
@@ -42,20 +48,13 @@ function babelFn () {
             ],
         }))
         // .pipe(sourcemaps.write('.'))
-        .pipe(remember('babel'))
+        // .pipe(remember('babel'))
         .pipe(gulp.dest(destPath));
 }
 
-gulp.task('babel', ['clean',], () => {
-    return babelFn();
-});
-
-gulp.task('default', ['babel',], () => {
-
-    moveSSL();
-
+function startServer (done) {
     const command = [ 'node', '--harmony', ];
-    command.push('http2.js');
+    command.push('spdy.js');
 
     const monitor = respawn(command, {
         env,
@@ -75,12 +74,13 @@ gulp.task('default', ['babel',], () => {
         monitor.stop(() => monitor.start());
     }
 
-    let isError;
-    const watch = gulp.watch(bebelFiles, () => {
+    const watch = gulp.watch(bebelFiles, (watchDone) => {
         gutil.log(`Watch project is doing ...`);
+        watchDone();
     });
     watch.on('change', (evt) => {
-        gutil.log(`File change : ${evt.path}`);
+        gutil.log(`File change : ${evt}`);
+        let isError;
         babelFn()
             .on('error', () => {
                 isError = true;
@@ -92,4 +92,20 @@ gulp.task('default', ['babel',], () => {
                 restartMonitor();
             });
     });
-});
+    done();
+}
+
+/**
+ * 默认任务
+ * @module gulp#4.0
+ */
+gulp.task('default', gulp.series(
+	// 第一步：clean
+    clean,
+    // 第二步：babel
+    babelFn,
+	// 第三步：编译 + 移动模板
+	gulp.parallel(moveSSL, moveTpl),
+	// 第四步：启动服务
+	startServer
+));

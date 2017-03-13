@@ -1,5 +1,3 @@
-'use strict';
-
 const DataCache = {
     token: '',
     token_expries: 0,
@@ -17,4 +15,4 @@ const DataCache = {
     }
 }
 
-export default DataCache;
+module.exports = DataCache;

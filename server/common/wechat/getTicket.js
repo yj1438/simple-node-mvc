@@ -1,10 +1,8 @@
-'use strict';
-
 const request = require('request');
 
 const getToken = require('./getToken');
 
-let DataCache = require('./DataCache');
+const DataCache = require('./DataCache');
 
 let TICKET_URL = 'http://api.weixin.qq.com/cgi-bin/ticket/getticket?type=jsapi&access_token=';
 
