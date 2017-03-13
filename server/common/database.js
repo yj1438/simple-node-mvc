@@ -23,7 +23,6 @@ class Database {
      * 取数据库单例
      * @static
      * @returns 
-     * 
      * @memberOf Database
      */
     static getInstance () {
@@ -78,7 +77,6 @@ class Database {
     /**
      * 数据库执行 SQL 方法
      * sync
-     * 
      * @static
      * @param {any} sql
      * @param {any} data
@@ -99,7 +97,7 @@ class Database {
                     /**
                      * sql检控
                      */
-                    // console.log('sql: >>> ' + sql + ' data: >>> ' + JSON.stringify(data));
+                    // console.log(new Date() + ': sql>>> ' + sql + ' data>>> ' + JSON.stringify(data));
                     if (err) {
                         console.log('sql: error' + err);
                         reject(err);

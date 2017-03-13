@@ -19,11 +19,11 @@ env.NODE_PATH = env.NODE_PATH || path.resolve(__dirname, destPath);
 env.NODE_ENV = env.NODE_ENV || 'development';
 
 gulp.task('clean', () => {
-    return del([ destPath ]);
+    return del([ destPath, ]);
 });
 
 function moveSSL () {
-    return gulp.src('server/SSL/*', {base: 'server'})
+    return gulp.src('server/SSL/*', {base: 'server',})
         .pipe(gulp.dest(destPath));
 }
 
@@ -46,11 +46,11 @@ function babelFn () {
         .pipe(gulp.dest(destPath));
 }
 
-gulp.task('babel', ['clean'], () => {
+gulp.task('babel', ['clean',], () => {
     return babelFn();
 });
 
-gulp.task('default', ['babel'], () => {
+gulp.task('default', ['babel',], () => {
 
     moveSSL();
 
@@ -76,7 +76,7 @@ gulp.task('default', ['babel'], () => {
     }
 
     let isError;
-    const watch = gulp.watch(bebelFiles, (done) => {
+    const watch = gulp.watch(bebelFiles, () => {
         gutil.log(`Watch project is doing ...`);
     });
     watch.on('change', (evt) => {
