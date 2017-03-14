@@ -79,6 +79,9 @@ class Route {
             if (route.args) {
                 route.controller = _route.controller;
                 route.action = _route.action;
+                /**
+                 * 处理 uri 参数
+                 */
                 route.args.shift(); //第一个值为匹配到的整个url，去掉
                 delete route.args['index'];
                 delete route.args['input'];
