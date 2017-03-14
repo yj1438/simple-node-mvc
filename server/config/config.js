@@ -8,9 +8,9 @@ import fs from 'fs';
 export default {
     
     certificate: {
-        key: fs.readFileSync('SSL/privkey.pem'),
-        cert: fs.readFileSync('SSL/cert.pem'),
-        ca: fs.readFileSync('SSL/fullchain.pem'),
+        key: fs.readFileSync('SSL/ca.key'),
+        cert: fs.readFileSync('SSL/cert.crt'),
+        // ca: fs.readFileSync('SSL/fullchain.pem'),
     },
     
     host: '0.0.0.0',
@@ -29,6 +29,6 @@ export default {
      */
     cacheControl : 7 * 24 * 3600,            //浏览器缓存时间（秒）
 
-    routePrefix: '/mini-program-together',      // 路由前缀
+    routePrefix: '/admin',      // 路由前缀
     
 };

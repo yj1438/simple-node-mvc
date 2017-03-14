@@ -4,7 +4,7 @@ import url from 'url';
 import path from 'path';
 import fs from 'fs';
 
-import config from '../config';
+import config from '../config/config';
 import HttpBase from './HttpBase';
 
 

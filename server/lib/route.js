@@ -5,7 +5,8 @@ import fs from 'fs';
 import path from 'path';
 import { parse, } from 'url';
 // import route_map from '../route_map';
-import config from '../config';
+import config from '../config/config';
+
 
 const root = process.cwd();
 const routeDir = path.resolve(root, 'route');

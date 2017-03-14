@@ -2,7 +2,7 @@
 
 import http from 'http';
 //
-import config from './config';
+import config from './config/config';
 import handlerRequest from './lib/handlerRequest';
 
 /*

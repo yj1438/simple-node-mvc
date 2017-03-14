@@ -4,7 +4,7 @@ import zlib from 'zlib';
 
 import contentTypes from './contentTypes';
 import HttpError from './httpError';
-import config from '../config';
+import config from '../config/config';
 
 const gzipTypes = ['html', 'json', 'js', 'css', 'xml'];
 /**

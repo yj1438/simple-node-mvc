@@ -3,7 +3,7 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,blockquot
 	padding: 0;
 }
 body {
-	font: 12px/1.5 Tahoma, Helvetica, Arial, "Microsoft YaHei", sans-serif;
+    font-family: "Helvetica Neue", Tahoma, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
 }
 table {
@@ -79,39 +79,4 @@ a:link, a:visited, a:hover, a:active {
     display: -webkit-box;
     -webkit-box-pack: center;
     -webkit-box-align: center;
-}
-/**/
-#header {
-	
-}
-#content {
-	
-}
-#footer {
-	clear: both;
-}
-#pageloading {
-	position: fixed;
-	_position: absolute;
-	z-index: 1;
-	top: 0;
-	left: 0;
-	width: 80px;
-	padding: 2px;
-	text-align: center;
-	background: #c44;
-	color: #fff;
-}
-
-#img_area {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-content: center;
-    align-items: center;
-}
-#img_area img {
-    width: 5%;
-    vertical-align: middle;
 }

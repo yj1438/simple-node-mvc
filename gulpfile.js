@@ -11,7 +11,8 @@ const cached = require('gulp-cached');
 const respawn = require('respawn');
 const del = require('del');
 
-const bebelFiles = ['server/**/*.js',],
+const bebelFiles = 'server/**/*.js',
+    tplFiles = 'server/views/**/*.html',
     destPath = 'build';
 
 const env = process.env;
@@ -28,13 +29,13 @@ function moveSSL () {
 }
 
 function moveTpl () {
-    return gulp.src('server/views/**/*.html', {base: 'server',})
+    return gulp.src(tplFiles, {base: 'server',})
         .pipe(cached('tpl'))
         .pipe(gulp.dest(destPath));
 }
 
 function babelFn () {
-    return gulp.src(bebelFiles)
+    return gulp.src([bebelFiles,])
         .pipe(cached('babel'))
         // .pipe(sourcemaps.init())
         .pipe(babel({
@@ -74,12 +75,18 @@ function startServer (done) {
         monitor.stop(() => monitor.start());
     }
 
-    const watch = gulp.watch(bebelFiles, (watchDone) => {
-        gutil.log(`Watch project is doing ...`);
+    /**
+     * js文件监听
+     */
+    const watch = gulp.watch([bebelFiles, tplFiles, ], (watchDone) => {
+        gutil.log(`JS Watch project is doing ...`);
         watchDone();
     });
     watch.on('change', (evt) => {
         gutil.log(`File change : ${evt}`);
+        if (evt.endsWith('.html')) {
+            moveTpl();
+        }
         let isError;
         babelFn()
             .on('error', () => {
@@ -92,6 +99,7 @@ function startServer (done) {
                 restartMonitor();
             });
     });
+
     done();
 }
 

@@ -1,72 +1,10 @@
-<!doctype html>
-<html lang="zh">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /><!-- 默认使用最新浏览器 -->
-    <meta http-equiv="Cache-Control" content="no-siteapp" /><!-- 不被网页(加速)转码 -->
-    <meta name="renderer" content="webkit" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui" />
-    <title>HTTP2 Test / Terminal Detection</title>
-    <meta name="keywords" content="http2,spdy,http protocol,http2 协议,http2 text,http 检测,useragent"/>
-    <meta name="description" content="http2测试，检测终端设备是否支持HTTP2协议，SPDY协议检测，查看UserAgent" />
-    <style>
-        body {
-            font-family: "Helvetica Neue", "Microsoft YaHei", Helvetica, Arial, sans-serif;
-            -webkit-font-smoothing: antialiased;
-            max-width: 960px;
-            margin: 5em auto;
-        }
-        h1 {
-            text-align: center;
-        }
-        #main_page > *{
-            font-size: 18px;
-            text-align: center;
-        }
-
-        @media (max-width: 768px) {
-            body {
-                margin: 5em 1em;
-            }
-        }
-    </style>
-    <script>
-    var _hmt = _hmt || [];
-    (function() {
-        var hm = document.createElement("script");
-        hm.src = "//hm.baidu.com/hm.js?a76c123dbeccd8bc876bd5672d822ce7";
-        var s = document.getElementsByTagName("script")[0]; 
-        s.parentNode.insertBefore(hm, s);
-    })();
-    </script>
-</head>
-<body>
+{{include '../header'}}
+<link rel="stylesheet" type="text/css" href="/css/base.css">
 <h1>
-    Welcome to HTTP2/SPDY Terminal Detection
+    Welcome to tiny-server !
 </h1>
 <h2 style="text-align: center;">
-    在线查看 UserAgent。在线检测设备对 http2/spdy 协议的支持
+    {{message}}
 </h2>
-    
-    <section id="main_page">
-        <p>{{userAgent}}</p>
-        <p style="font-size: 24px;">{{isSpdy}}</p>
-        <h2 style="font-size: 24px;">协议类型： {{protocol}}</h2>
-    </section>
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
 
-</body>
-</html>
+{{include '../footer'}}

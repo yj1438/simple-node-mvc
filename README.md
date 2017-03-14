@@ -13,3 +13,4 @@
 * server 文件夹为开发源码，build 为编译后的文件
 * 模板引擎采用 [art-template](https://github.com/aui/artTemplate)，性能优异，用户可自由替换
 
+https://0.0.0.0/index/index/aaa/bbb/ccc
