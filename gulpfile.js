@@ -55,7 +55,13 @@ function babelFn () {
 
 function startServer (done) {
     const command = [ 'node', '--harmony', ];
+    /**
+     * =============更改 server 协议，换此入口文件================
+     */
     command.push('spdy.js');
+    /**
+     * =============================
+     */
 
     const monitor = respawn(command, {
         env,
