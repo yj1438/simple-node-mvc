@@ -4,7 +4,7 @@ import http2 from 'http2';
 import http from 'http';
 
 //
-import config from './config';
+import config from './config/config';
 import handlerRequest from './lib/handlerRequest';
 
 http2.createServer(config.certificate, function (req, res) {
